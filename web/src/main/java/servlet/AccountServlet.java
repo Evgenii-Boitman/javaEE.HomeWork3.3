@@ -1,4 +1,4 @@
-package by.boitman;
+package servlet;
 
 public class BankingAccountServlet {
 }
