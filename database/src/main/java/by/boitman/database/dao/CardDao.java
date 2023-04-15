@@ -1,7 +1,7 @@
 package by.boitman.database.dao;
 
 import by.boitman.database.DummyDatabase;
-import by.boitman.database.entity.CreditCard;
+import by.boitman.database.entity.Card;
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
@@ -11,28 +11,28 @@ import java.util.Optional;
 import static lombok.AccessLevel.PRIVATE;
 
 @NoArgsConstructor(access = PRIVATE)
-public class CreditCardDao {
-    private static final CreditCardDao INSTANCE = new CreditCardDao();
+public class CardDao {
+    private static final CardDao INSTANCE = new CardDao();
     private final DummyDatabase db = DummyDatabase.getInstance();
 
-    public List<CreditCard> getAll() {
-        return new ArrayList<>(db.getCreditCards().values());
+    public List<Card> getAll() {
+        return new ArrayList<>(db.getCards().values());
     }
 
-    public Optional<CreditCard> getById(Long id) {
-        return Optional.ofNullable(db.getCreditCards().get(id));
+    public Optional<Card> getById(Long id) {
+        return Optional.ofNullable(db.getCards().get(id));
     }
 
-    public CreditCard create(CreditCard creditCard) {
-        return db.getCreditCards().put(creditCard.getId(), creditCard);
+    public Card create(Card card) {
+        return db.getCards().put(card.getId(), card);
     }
 
-    public CreditCard delete(Long id) {
-        return Optional.ofNullable(db.getCreditCards().remove(id))
+    public Card delete(Long id) {
+        return Optional.ofNullable(db.getCards().remove(id))
                 .orElseThrow(RuntimeException::new);
     }
 
-    public static CreditCardDao getInstance() {
+    public static CardDao getInstance() {
         return INSTANCE;
     }
 }

@@ -1,4 +1,4 @@
 package servlet;
 
-public class BankingAccountServlet {
+public class AccountServlet {
 }

@@ -5,5 +5,5 @@ import lombok.NoArgsConstructor;
 import static lombok.AccessLevel.PRIVATE;
 
 @NoArgsConstructor(access = PRIVATE)
-public class BankingAccountDao {
+public class AccountDao {
 }
