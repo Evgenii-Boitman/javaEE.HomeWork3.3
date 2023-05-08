@@ -9,19 +9,21 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>Банк-Речица</title>
+    <title>Добро пожаловать в Банк "Речица"</title>
 </head>
 <body>
 <%@include file="header.jsp" %>
-<h1>
-    <c:forEach var="card" items="${requestScope.cards}">
-        <h1>Владелец кредитной карточки: ${card.ownerName} ${card.ownerSurname} </h1>
-        <h4>Дата окончания действия кредитной карточки: ${card.dateCard}</h4>
-        <h4>Номер кредитной карточки: ${card.cardNumber}</h4>
-        <h4>Баланс кредитной карточки: ${card.balance}</h4>
-        <h4><a href=/cards?id=${card.id}>Подробнее</a></h4>
-    </c:forEach>
-</h1>
+
+<h1>${sessionScope.user.name}, рады Вас приветствовать!</h1>
+
+<c:forEach var="card" items="${requestScope.cards}">
+    <h1>Владелец кредитной карточки: ${card.ownerName} ${card.ownerSurname} </h1>
+    <h4>Дата окончания действия кредитной карточки: ${card.dateCard}</h4>
+    <h4>Номер кредитной карточки: ${card.cardNumber}</h4>
+    <h4>Баланс кредитной карточки: ${card.balance}</h4>
+    <h4><a href=/cards?id=${card.id}>Подробнее</a></h4>
+</c:forEach>
+
 <%@include file="footer.jsp" %>
 </body>
 </html>

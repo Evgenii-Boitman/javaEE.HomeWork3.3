@@ -1,4 +1,4 @@
-package filter;
+package by.boitman.web.filter;
 
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;

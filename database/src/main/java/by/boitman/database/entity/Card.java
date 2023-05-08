@@ -2,18 +2,22 @@ package by.boitman.database.entity;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
-import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
-//@EqualsAndHashCode(of = "id")
+@EqualsAndHashCode(of = "id")
 @Data
 @Builder
 public class Card {
     private Long id;
     private String ownerName;
     private String ownerSurname;
-    private LocalDate dateCard;
+    private String dateCard;
     private Long cardNumber;
     private Double balance;
+    @Builder.Default
+    private List<User> users = new ArrayList<>();
 
 }

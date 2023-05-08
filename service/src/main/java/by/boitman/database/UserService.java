@@ -17,8 +17,8 @@ public final class UserService {
         return userDao.getByEmailAndPass(email, password);
     }
 
-    public User save(User user) {
-        return userDao.create(user);
+    public Optional<User> save(User user) {
+        return userDao.createUser(user);
     }
 
 
@@ -26,3 +26,4 @@ public final class UserService {
         return INSTANCE;
     }
 }
+

@@ -9,30 +9,44 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-  <title>Registration</title>
+  <title>Регистрация нового пользователя</title>
 </head>
 <body>
 <%@ include file="header.jsp" %>
 
 <form action="${pageContext.request.contextPath}/registration" method="post">
-  <label for="nameId">Name:</label><br>
+  <label for="nameId">Укажите Ваше имя:</label><br>
   <input type="text" id="nameId" name="name"><br>
 
-  <label for="surnameId">Surname:</label><br>
+  <label for="surnameId">Укажите Вашу фамилию:</label><br>
   <input type="text" id="surnameId" name="surname"><br>
 
-  <label for="emailId">Email:</label><br>
+  <label for="emailId">Укажите Ваш Email:</label><br>
   <input type="email" id="emailId" name="email"><br>
 
-  <label for="passwordId">Password:</label><br>
+  <label for="passwordId">Укажите Ваш пароль:</label><br>
   <input type="password" id="passwordId" name="password"><br>
 
-  <label for="genderId">Gender?:</label><br>
+<%--  <label for="genderId">Укажите Ваш пол (MALE или FEMALE):</label><br>--%>
+<%--  <input type="gender" id="genderId" name="gender"><br>c--%>
+
+<%--  <label for="roleId">Укажите Вашу роль (ADMIN или USER):</label><br>--%>
+<%--  <input type="role" id="roleId" name="role"><br>--%>
+
+  <label for="genderId">Укажите Ваш пол:</label><br>
 
   <select name="gender" id="genderId">
-    <option value="MALE">Мужчина</option>
-    <option value="FEMALE">Женщина</option>
-  </select>
+    <option value="MALE">MALE</option>
+    <option value="FEMALE">FEMALE</option>
+  </select><br>
+
+  <label for="rolesId">Укажите Вашу роль:</label><br>
+
+  <select name="roles" id="rolesId">
+    <option value="USER">USER</option>
+    <option value="ADMIN">ADMIN</option>
+  </select><br>
+  <br>
 
   <input type="submit" value="Submit">
 </form>

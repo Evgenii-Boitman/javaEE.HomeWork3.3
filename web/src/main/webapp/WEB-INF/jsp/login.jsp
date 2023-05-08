@@ -9,7 +9,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-  <title>Login</title>
+  <title>Добро пожаловать в Банк Речица</title>
 </head>
 <body>
 <%@ include file="header.jsp" %>
@@ -18,7 +18,7 @@
   <label for="emailId">Email:</label><br>
   <input type="email" id="emailId" name="email"><br>
 
-  <label for="passwordId">Password:</label><br>
+  <label for="passwordId">Пароль:</label><br>
   <input type="password" id="passwordId" name="password"><br>
 
   <input type="submit" value="Submit">

@@ -1,4 +1,4 @@
-package servlet;
+package by.boitman.web.servlet;
 
 import by.boitman.database.UserService;
 import by.boitman.database.entity.User;
@@ -8,7 +8,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.SneakyThrows;
-import util.PagesUtil;
+import by.boitman.web.util.PagesUtil;
 
 import java.io.IOException;
 @WebServlet("/login")
