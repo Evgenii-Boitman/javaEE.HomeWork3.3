@@ -79,16 +79,15 @@ public class CardDao {
         List<Card> cards = new ArrayList<>();
         try (Connection connection = ConnectionPool.get();
              PreparedStatement preparedStatement = connection.prepareStatement(SELECT_BY_CARD)) {
-            preparedStatement.setDouble(1, filter.balance());
-            preparedStatement.setDouble(2, filter.limit());
+            preparedStatement.setDouble(1, filter.balances());
+            preparedStatement.setInt(2, filter.limit());
+            preparedStatement.setDouble(3, filter.limit() * (filter.page() - 1));
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 cards.add(Card.builder()
                         .id(resultSet.getLong("id"))
                         .ownerName(resultSet.getString("owner_name"))
                         .ownerSurname(resultSet.getString("owner_surname"))
-                        .dateCard(resultSet.getString("date_card"))
-                        .cardNumber(Long.valueOf(resultSet.getString("card_number")))
                         .balance(Double.valueOf(resultSet.getString("balance")))
                         .build());
             }

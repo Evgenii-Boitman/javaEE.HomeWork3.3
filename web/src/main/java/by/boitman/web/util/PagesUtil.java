@@ -1,6 +1,5 @@
 package by.boitman.web.util;
 
-//@UtilityClass
 public class PagesUtil {
     private static final String PREFIX = "/WEB-INF/jsp/";
     public static final String CARDS = PREFIX + "cards.jsp";

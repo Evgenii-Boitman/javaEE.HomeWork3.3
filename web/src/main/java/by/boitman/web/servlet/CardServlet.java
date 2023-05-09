@@ -20,22 +20,16 @@ public class CardServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        String id = req.getParameter("id");
-//        if (id == null) {
-//            req.setAttribute("cards", cardService.getFindByFilter(new CardFilter(
-//                    Integer.parseInt(req.getParameter("balance") != null ? req.getParameter("balance") : "1000"),
-//                    Integer.parseInt(req.getParameter("limit") != null ? req.getParameter("limit") : "100")
-//                    )));
-//            req.getRequestDispatcher(PagesUtil.CARDS).forward(req, resp);
-//        } else {
-//            redirectToCardPage(req, resp, cardService.getById(Long.parseLong(id)));
         String id = req.getParameter("id");
         if (id == null) {
-            req.setAttribute("cards", cardService.getAll());
+            req.setAttribute("cards", cardService.getFindByFilter(new CardFilter(
+                    Integer.parseInt(req.getParameter("balances") != null ? req.getParameter("balances") : "1000"),
+                    Integer.parseInt(req.getParameter("limit") != null ? req.getParameter("limit") : "10"),
+                    Integer.parseInt(req.getParameter("page") != null ? req.getParameter("page") : "1")
+            )));
             req.getRequestDispatcher(PagesUtil.CARDS).forward(req, resp);
         } else {
-            req.setAttribute("card", cardService.getById(Long.parseLong(id)));
-            req.getRequestDispatcher(PagesUtil.CARD).forward(req, resp);
+            redirectToCardPage(req, resp, cardService.getById(Long.parseLong(id)));
         }
     }
 
@@ -60,7 +54,6 @@ public class CardServlet extends HttpServlet {
                 );
         super.doPost(req, resp);
     }
-
     @SneakyThrows
     private static void redirectToCardPage(HttpServletRequest req, HttpServletResponse resp, Card card) {
         req.setAttribute("card", card);
@@ -72,4 +65,5 @@ public class CardServlet extends HttpServlet {
         req.setAttribute("error", true);
         req.getRequestDispatcher(PagesUtil.CARD).forward(req, resp);
     }
+
 }

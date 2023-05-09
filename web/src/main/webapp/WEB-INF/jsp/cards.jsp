@@ -24,6 +24,7 @@
     <h4><a href=/cards?id=${card.id}>Подробнее</a></h4>
 </c:forEach>
 
+
 <%@include file="footer.jsp" %>
 </body>
 </html>

@@ -1,6 +1,8 @@
 package by.boitman.web.servlet;
+
 import by.boitman.database.AccountService;
 import by.boitman.database.entity.Account;
+import by.boitman.database.dto.AccountFilter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -10,28 +12,23 @@ import by.boitman.web.util.PagesUtil;
 import lombok.SneakyThrows;
 
 import java.io.IOException;
+
 @WebServlet("/accounts")
-public class AccountServlet extends HttpServlet{
+public class AccountServlet extends HttpServlet {
     private final AccountService accountService = AccountService.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        String id = req.getParameter("id");
-//        if (id == null) {
-//            req.setAttribute("cards", cardService.getFindByFilter(new CardFilter(
-//                    Integer.parseInt(req.getParameter("balance") != null ? req.getParameter("balance") : "1000"),
-//                    Integer.parseInt(req.getParameter("limit") != null ? req.getParameter("limit") : "100")
-//                    )));
-//            req.getRequestDispatcher(PagesUtil.CARDS).forward(req, resp);
-//        } else {
-//            redirectToCardPage(req, resp, cardService.getById(Long.parseLong(id)));
         String id = req.getParameter("id");
         if (id == null) {
-            req.setAttribute("accounts", accountService.getAllAccount());
+            req.setAttribute("accounts", accountService.getFindByFilterAccount(new AccountFilter(
+                    Integer.parseInt(req.getParameter("balancesAccount") != null ? req.getParameter("balancesAccount") : "1000"),
+                    Integer.parseInt(req.getParameter("limitAccount") != null ? req.getParameter("limitAccount") : "10"),
+                    Integer.parseInt(req.getParameter("pageAccount") != null ? req.getParameter("pageAccount") : "1")
+            )));
             req.getRequestDispatcher(PagesUtil.ACCOUNTS).forward(req, resp);
         } else {
-            req.setAttribute("account", accountService.getByIdAccount(Long.parseLong(id)));
-            req.getRequestDispatcher(PagesUtil.ACCOUNT).forward(req, resp);
+            redirectToAccountPage(req, resp, AccountService.getByIdAccount(Long.parseLong(id)));
         }
     }
 
@@ -55,7 +52,6 @@ public class AccountServlet extends HttpServlet{
         super.doPost(req, resp);
     }
 
-
     @SneakyThrows
     private static void redirectToAccountPage(HttpServletRequest req, HttpServletResponse resp, Account account) {
         req.setAttribute("account", account);
@@ -67,4 +63,5 @@ public class AccountServlet extends HttpServlet{
         req.setAttribute("error", true);
         req.getRequestDispatcher(PagesUtil.ACCOUNT).forward(req, resp);
     }
+
 }

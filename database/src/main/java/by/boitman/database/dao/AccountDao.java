@@ -78,8 +78,9 @@ public class AccountDao {
         List<Account> accounts = new ArrayList<>();
         try (Connection connection = ConnectionPool.get();
              PreparedStatement preparedStatement = connection.prepareStatement(SELECT_BY_ACCOUNT)) {
-            preparedStatement.setDouble(1, filterAccount.balanceAccount());
+            preparedStatement.setDouble(1, filterAccount.balancesAccount());
             preparedStatement.setDouble(2, filterAccount.limit());
+            preparedStatement.setDouble(3, filterAccount.limit() * (filterAccount.pageAccount() - 1));
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 accounts.add(Account.builder()

@@ -18,6 +18,7 @@ public class CardService {
     public List<Card> getAll() {
         return cardDao.findAll();
     }
+
     public List<Card> getFindByFilter(CardFilter filter) {
         return cardDao.findByFilter(filter);
     }
@@ -32,6 +33,7 @@ public class CardService {
     public Optional<Card> create(Card card) {
         return cardDao.create(card);
     }
+
     public static CardService getInstance() {
         return INSTANCE;
     }

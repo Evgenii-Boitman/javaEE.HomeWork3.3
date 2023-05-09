@@ -3,7 +3,6 @@ package by.boitman.database;
 import by.boitman.database.dao.AccountDao;
 import by.boitman.database.dto.AccountFilter;
 import by.boitman.database.entity.Account;
-import by.boitman.database.entity.User;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
@@ -14,7 +13,7 @@ import static lombok.AccessLevel.PRIVATE;
 @NoArgsConstructor(access = PRIVATE)
 public class AccountService {
     private static final AccountService INSTANCE = new AccountService();
-    private final AccountDao accountDao = AccountDao.getInstance();
+    private static final AccountDao accountDao = AccountDao.getInstance();
 
     public List<Account> getAllAccount() {
         return AccountDao.findAllAccount();
@@ -23,7 +22,7 @@ public class AccountService {
         return accountDao.findByFilterAccount(filterAccount);
     }
 
-    public Account getByIdAccount(Long id) {
+    public static Account getByIdAccount(Long id) {
         return accountDao.findByIdAccount(id)
                 .orElse(Account.builder()
                         .ownerNameAccount("Данный пользователь отсутствует в базе")
