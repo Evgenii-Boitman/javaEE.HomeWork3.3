@@ -24,6 +24,8 @@
     <h4>Номер кредитной карточки: ${card.cardNumber}</h4>
     <h4>Баланс кредитной карточки: ${card.balance}</h4>
 </h1>
+
+
 <%--</c:if>--%>
 
 <%@include file="footer.jsp" %>

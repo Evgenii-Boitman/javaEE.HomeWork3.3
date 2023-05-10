@@ -16,6 +16,19 @@
 
 <h1>${sessionScope.user.name}, рады Вас приветствовать!</h1>
 
+<form action="${pageContext.request.contextPath}/cards" method="get">
+    <label for="pageId">Введите номер страницы:</label><br>
+    <input type="text" id="pageId" name="page"><br>
+
+    <label for="limitId">Введите количество позиций на странице:</label><br>
+    <input type="text" id="limitId" name="limit"><br>
+
+    <label for="balancesId">Введите максимальный баланс:</label><br>
+    <input type="text" id="balancesId" name="balances"><br>
+
+    <input type="submit" value="Submit">
+</form>
+
 <c:forEach var="card" items="${requestScope.cards}">
     <h1>Владелец кредитной карточки: ${card.ownerName} ${card.ownerSurname} </h1>
     <h4>Дата окончания действия кредитной карточки: ${card.dateCard}</h4>

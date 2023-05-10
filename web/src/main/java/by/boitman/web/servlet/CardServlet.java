@@ -23,7 +23,7 @@ public class CardServlet extends HttpServlet {
         String id = req.getParameter("id");
         if (id == null) {
             req.setAttribute("cards", cardService.getFindByFilter(new CardFilter(
-                    Integer.parseInt(req.getParameter("balances") != null ? req.getParameter("balances") : "1000"),
+                    Integer.parseInt(req.getParameter("balances") != null ? req.getParameter("balances") : "2000"),
                     Integer.parseInt(req.getParameter("limit") != null ? req.getParameter("limit") : "10"),
                     Integer.parseInt(req.getParameter("page") != null ? req.getParameter("page") : "1")
             )));
