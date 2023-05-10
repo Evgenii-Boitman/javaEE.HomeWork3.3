@@ -1,6 +1,6 @@
-package by.boitman.database.connection;
+package by.boitman.service.connection;
 
-import by.boitman.database.util.PropertiesManager;
+import by.boitman.service.util.PropertiesManager;
 import lombok.SneakyThrows;
 import lombok.experimental.UtilityClass;
 import org.apache.tomcat.jdbc.pool.DataSource;

@@ -1,8 +1,8 @@
-package by.boitman.database;
+package by.boitman.service;
 
-import by.boitman.database.dao.AccountDao;
-import by.boitman.database.dto.AccountFilter;
-import by.boitman.database.entity.Account;
+import by.boitman.service.dao.AccountDao;
+import by.boitman.service.dto.AccountFilter;
+import by.boitman.service.entity.Account;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
@@ -13,26 +13,26 @@ import static lombok.AccessLevel.PRIVATE;
 @NoArgsConstructor(access = PRIVATE)
 public class AccountService {
     private static final AccountService INSTANCE = new AccountService();
-    private static final AccountDao accountDao = AccountDao.getInstance();
+    private static final AccountDao ACCOUNT_DAO = AccountDao.getInstance();
 
     public List<Account> getAllAccount() {
         return AccountDao.findAllAccount();
     }
     public List<Account> getFindByFilterAccount(AccountFilter filterAccount) {
-        return accountDao.findByFilterAccount(filterAccount);
+        return ACCOUNT_DAO.findByFilterAccount(filterAccount);
     }
 
     public static Account getByIdAccount(Long id) {
-        return accountDao.findByIdAccount(id)
+        return ACCOUNT_DAO.findByIdAccount(id)
                 .orElse(Account.builder()
                         .ownerNameAccount("Данный пользователь отсутствует в базе")
                         .build());
     }
     public Optional<Account> save(Account account) {
-        return accountDao.createAccount(account);
+        return ACCOUNT_DAO.createAccount(account);
     }
     public Optional<Account> createAccount(Account account) {
-        return accountDao.createAccount(account);
+        return ACCOUNT_DAO.createAccount(account);
     }
     public static AccountService getInstance() {
         return INSTANCE;

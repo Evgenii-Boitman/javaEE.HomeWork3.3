@@ -1,4 +1,4 @@
-package by.boitman.database.dto;
+package by.boitman.service.dto;
 
 public record CardFilter(int balances, int limit, int page) {
 }

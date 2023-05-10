@@ -1,8 +1,8 @@
-package by.boitman.database.dao;
+package by.boitman.service.dao;
 
-import by.boitman.database.connection.ConnectionPool;
-import by.boitman.database.entity.User;
-import by.boitman.database.entity.enam.Gender;
+import by.boitman.service.connection.ConnectionPool;
+import by.boitman.service.entity.User;
+import by.boitman.service.entity.enam.Gender;
 import lombok.NoArgsConstructor;
 
 import java.sql.Connection;
@@ -22,11 +22,11 @@ public final class UserDao {
 
     private static final String SELECT_ALL_USER = "SELECT * FROM users";
     private static final String SELECT_USER_BY_ID = SELECT_ALL_USER + " WHERE id =?";
-    private static final String SELECT_BY_EMAIL_PASS = "SELECT * FROM users WHERE email =? AND passwords = ?";
+    private static final String SELECT_BY_EMAIL_PASS = "SELECT * FROM users WHERE email =? AND password = ?";
 
-    private static final String INSERT_USER = "INSERT INTO users (names, surname, email, passwords, gender, roles) VALUES (?,?,?,?,?,?)";
+    private static final String INSERT_USER = "INSERT INTO users (name, surname, email, password, gender, roles) VALUES (?,?,?,?,?,?)";
     private static final String DELETE_USER_BY_ID = "DELETE FROM users WHERE id =?";
-    private static final String UPDATE_USER_BY_ID = "UPDATE users SET names = ?, surname = ?, email = ?, passwords = ? WHERE id = ?";
+    private static final String UPDATE_USER_BY_ID = "UPDATE users SET name = ?, surname = ?, email = ?, password = ? WHERE id = ?";
 
 
     public Optional<User> getByEmailAndPass(String email, String password) {
@@ -37,7 +37,7 @@ public final class UserDao {
             ResultSet resultSet = preparedStatement.executeQuery();
             return resultSet.next() ? Optional.of(User.builder()
                     .id(resultSet.getLong("id"))
-                    .name(resultSet.getString("names"))
+                    .name(resultSet.getString("name"))
                     .surname(resultSet.getString("surname"))
                     .email(resultSet.getString("email"))
                     .build())
@@ -56,7 +56,7 @@ public final class UserDao {
             while (resultSet.next()) {
                 user.add(User.builder()
                         .id(resultSet.getLong("id"))
-                        .name(resultSet.getString("names"))
+                        .name(resultSet.getString("name"))
                         .surname(resultSet.getString("surname"))
                         .email(resultSet.getString("email"))
                         .gender(Gender.valueOf(resultSet.getString("gender")))
@@ -75,7 +75,7 @@ public final class UserDao {
             ResultSet resultSet = preparedStatement.executeQuery();
             return resultSet.next() ? Optional.of(User.builder()
                     .id(resultSet.getLong("id"))
-                    .name(resultSet.getString("names"))
+                    .name(resultSet.getString("name"))
                     .surname(resultSet.getString("surname"))
                     .email(resultSet.getString("email"))
                     .gender(Gender.valueOf(resultSet.getString("gender")))

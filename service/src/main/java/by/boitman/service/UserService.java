@@ -1,7 +1,7 @@
-package by.boitman.database;
+package by.boitman.service;
 
-import by.boitman.database.dao.UserDao;
-import by.boitman.database.entity.User;
+import by.boitman.service.dao.UserDao;
+import by.boitman.service.entity.User;
 import lombok.NoArgsConstructor;
 
 import java.util.Optional;

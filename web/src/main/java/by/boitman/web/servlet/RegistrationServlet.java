@@ -1,9 +1,9 @@
 package by.boitman.web.servlet;
 
-import by.boitman.database.UserService;
-import by.boitman.database.entity.User;
-import by.boitman.database.entity.enam.Gender;
-import by.boitman.database.entity.enam.Role;
+import by.boitman.service.UserService;
+import by.boitman.service.entity.User;
+import by.boitman.service.entity.enam.Gender;
+import by.boitman.service.entity.enam.Role;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -14,7 +14,7 @@ import by.boitman.web.util.PagesUtil;
 import java.io.IOException;
 import java.util.Optional;
 
-import static by.boitman.database.UserService.getInstance;
+import static by.boitman.service.UserService.getInstance;
 
 @WebServlet("/registration")
 public class RegistrationServlet extends HttpServlet {

@@ -1,8 +1,8 @@
 package by.boitman.web.servlet;
 
-import by.boitman.database.CardService;
-import by.boitman.database.dto.CardFilter;
-import by.boitman.database.entity.Card;
+import by.boitman.service.CardService;
+import by.boitman.service.dto.CardFilter;
+import by.boitman.service.entity.Card;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;

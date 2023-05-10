@@ -1,7 +1,7 @@
 package by.boitman.web.servlet;
 
-import by.boitman.database.AccountService;
-import by.boitman.database.entity.Account;
+import by.boitman.service.AccountService;
+import by.boitman.service.entity.Account;
 import by.boitman.web.util.PagesUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -12,7 +12,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Optional;
 
-import static by.boitman.database.AccountService.getInstance;
+import static by.boitman.service.AccountService.getInstance;
 
 @WebServlet("/addAccount")
 public class AddAccountServlet extends HttpServlet {

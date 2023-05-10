@@ -1,4 +1,4 @@
-package by.boitman.database.entity;
+package by.boitman.service.entity;
 
 import lombok.Builder;
 import lombok.Data;
@@ -10,14 +10,12 @@ import java.util.List;
 @EqualsAndHashCode(of = "id")
 @Data
 @Builder
-public class Card {
+public class Account {
     private Long id;
-    private String ownerName;
-    private String ownerSurname;
-    private String dateCard;
-    private Long cardNumber;
-    private Double balance;
+    private String ownerNameAccount;
+    private String ownerSurnameAccount;
+    private Long numberAccount;
+    private Double balanceAccount;
     @Builder.Default
     private List<User> users = new ArrayList<>();
-
 }

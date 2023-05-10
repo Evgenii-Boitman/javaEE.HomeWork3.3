@@ -1,4 +1,4 @@
-package by.boitman.database.dao;
+package by.boitman.service.dao;
 
 public class CardDaoTest {
 

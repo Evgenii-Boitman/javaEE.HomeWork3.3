@@ -1,8 +1,8 @@
-package by.boitman.database;
+package by.boitman.service;
 
-import by.boitman.database.dao.CardDao;
-import by.boitman.database.dto.CardFilter;
-import by.boitman.database.entity.Card;
+import by.boitman.service.dao.CardDao;
+import by.boitman.service.dto.CardFilter;
+import by.boitman.service.entity.Card;
 import lombok.NoArgsConstructor;
 
 import java.util.List;

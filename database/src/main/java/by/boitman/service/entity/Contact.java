@@ -1,4 +1,4 @@
-package by.boitman.database.entity;
+package by.boitman.service.entity;
 
 public class Contact {
     private String tel;

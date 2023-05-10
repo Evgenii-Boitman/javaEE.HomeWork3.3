@@ -1,8 +1,8 @@
 package by.boitman.web.servlet;
 
-import by.boitman.database.AccountService;
-import by.boitman.database.entity.Account;
-import by.boitman.database.dto.AccountFilter;
+import by.boitman.service.AccountService;
+import by.boitman.service.entity.Account;
+import by.boitman.service.dto.AccountFilter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;

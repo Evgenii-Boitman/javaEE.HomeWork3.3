@@ -1,7 +1,7 @@
-package by.boitman.database.entity;
+package by.boitman.service.entity;
 
-import by.boitman.database.entity.enam.Gender;
-import by.boitman.database.entity.enam.Role;
+import by.boitman.service.entity.enam.Gender;
+import by.boitman.service.entity.enam.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

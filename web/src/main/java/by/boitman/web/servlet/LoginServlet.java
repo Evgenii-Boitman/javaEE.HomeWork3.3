@@ -1,7 +1,7 @@
 package by.boitman.web.servlet;
 
-import by.boitman.database.UserService;
-import by.boitman.database.entity.User;
+import by.boitman.service.UserService;
+import by.boitman.service.entity.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;

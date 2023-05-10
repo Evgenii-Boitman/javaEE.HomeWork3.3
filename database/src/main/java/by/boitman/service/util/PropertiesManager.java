@@ -1,4 +1,4 @@
-package by.boitman.database.util;
+package by.boitman.service.util;
 
 import lombok.SneakyThrows;
 

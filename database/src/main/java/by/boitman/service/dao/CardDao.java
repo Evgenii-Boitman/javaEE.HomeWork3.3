@@ -1,8 +1,8 @@
-package by.boitman.database.dao;
+package by.boitman.service.dao;
 
-import by.boitman.database.connection.ConnectionPool;
-import by.boitman.database.dto.CardFilter;
-import by.boitman.database.entity.Card;
+import by.boitman.service.connection.ConnectionPool;
+import by.boitman.service.dto.CardFilter;
+import by.boitman.service.entity.Card;
 import lombok.NoArgsConstructor;
 
 import java.sql.Connection;
