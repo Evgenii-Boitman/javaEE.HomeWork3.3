@@ -1,7 +1,7 @@
 package by.boitman.web.servlet;
 
+import by.boitman.database.entity.UserEntity;
 import by.boitman.service.UserService;
-import by.boitman.service.entity.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -31,7 +31,7 @@ public class LoginServlet extends HttpServlet {
     }
 
     @SneakyThrows
-    private static void successLogin(HttpServletRequest req, HttpServletResponse resp, User user) {
+    private static void successLogin(HttpServletRequest req, HttpServletResponse resp, UserEntity user) {
         req.getSession().setAttribute("user", user);
         resp.sendRedirect("/cards");
     }

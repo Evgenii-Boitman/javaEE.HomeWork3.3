@@ -1,8 +1,8 @@
 package by.boitman.web.servlet;
 
+import by.boitman.database.dto.CardFilter;
+import by.boitman.database.entity.CardEntity;
 import by.boitman.service.CardService;
-import by.boitman.service.dto.CardFilter;
-import by.boitman.service.entity.Card;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -22,11 +22,14 @@ public class CardServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String id = req.getParameter("id");
         if (id == null) {
-            req.setAttribute("cards", cardService.getFindByFilter(new CardFilter(
-                    Integer.parseInt(req.getParameter("balances") != null ? req.getParameter("balances") : "2000"),
-                    Integer.parseInt(req.getParameter("limit") != null ? req.getParameter("limit") : "10"),
-                    Integer.parseInt(req.getParameter("page") != null ? req.getParameter("page") : "1")
-            )));
+            req.setAttribute("cards", cardService.getFindByFilter(
+                    CardFilter.builder()
+                            .balance(Double.valueOf(req.getParameter("balances")))
+                            .limit(Integer.parseInt(req.getParameter("limit")))
+                            .page(Integer.parseInt(req.getParameter("page")))
+                            .build()
+
+            ));
             req.getRequestDispatcher(PagesUtil.CARDS).forward(req, resp);
         } else {
             redirectToCardPage(req, resp, cardService.getById(Long.parseLong(id)));
@@ -35,15 +38,13 @@ public class CardServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String ownerName = req.getParameter("owner_name");
-        String ownerSurname = req.getParameter("owner_surname");
-        String dateCard = req.getParameter("date_card");
+        String ownerName = req.getParameter("name");
+        String ownerSurname = req.getParameter("surname");
         String cardNumber = req.getParameter("card_number");
-        String balance = req.getParameter("balance");
-        Card cardForCreation = Card.builder()
+        String balance = req.getParameter("card_balance");
+        CardEntity cardForCreation = CardEntity.builder()
                 .ownerName(ownerName)
                 .ownerSurname(ownerSurname)
-                .dateCard(dateCard)
                 .cardNumber(Long.valueOf(cardNumber))
                 .balance(Double.valueOf(balance))
                 .build();
@@ -54,8 +55,9 @@ public class CardServlet extends HttpServlet {
                 );
         super.doPost(req, resp);
     }
+
     @SneakyThrows
-    private static void redirectToCardPage(HttpServletRequest req, HttpServletResponse resp, Card card) {
+    private static void redirectToCardPage(HttpServletRequest req, HttpServletResponse resp, CardEntity card) {
         req.setAttribute("card", card);
         req.getRequestDispatcher(PagesUtil.CARD).forward(req, resp);
     }

@@ -1,8 +1,8 @@
 package by.boitman.web.servlet;
 
+import by.boitman.database.dto.AccountFilter;
+import by.boitman.database.entity.AccountEntity;
 import by.boitman.service.AccountService;
-import by.boitman.service.entity.Account;
-import by.boitman.service.dto.AccountFilter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -21,30 +21,33 @@ public class AccountServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String id = req.getParameter("id");
         if (id == null) {
-            req.setAttribute("accounts", accountService.getFindByFilterAccount(new AccountFilter(
-                    Integer.parseInt(req.getParameter("balancesAccount") != null ? req.getParameter("balancesAccount") : "1000"),
-                    Integer.parseInt(req.getParameter("limitAccount") != null ? req.getParameter("limitAccount") : "10"),
-                    Integer.parseInt(req.getParameter("pageAccount") != null ? req.getParameter("pageAccount") : "1")
-            )));
+            req.setAttribute("accounts", accountService.getFindByFilter(
+                    AccountFilter.builder()
+                            .accountBalance(Double.valueOf(req.getParameter("account_balance")))
+                            .limit(Integer.parseInt(req.getParameter("limit")))
+                            .page(Integer.parseInt(req.getParameter("page")))
+                            .build()
+
+            ));
             req.getRequestDispatcher(PagesUtil.ACCOUNTS).forward(req, resp);
         } else {
-            redirectToAccountPage(req, resp, AccountService.getByIdAccount(Long.parseLong(id)));
+            redirectToAccountPage(req, resp, accountService.getById(Long.parseLong(id)));
         }
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String ownerNameAccount = req.getParameter("owner_name_account");
-        String ownerSurnameAccount = req.getParameter("owner_surname_account");
-        String numberAccount = req.getParameter("account_number");
-        String balanceAccount = req.getParameter("balance_account");
-        Account accountForCreation = Account.builder()
+        String ownerNameAccount = req.getParameter("name");
+        String ownerSurnameAccount = req.getParameter("surname");
+        String numberAccount = req.getParameter("number_account");
+        String accountBalance = req.getParameter("account_balance");
+        AccountEntity accountForCreation = AccountEntity.builder()
                 .ownerNameAccount(ownerNameAccount)
                 .ownerSurnameAccount(ownerSurnameAccount)
                 .numberAccount(Long.valueOf(numberAccount))
-                .balanceAccount(Double.valueOf(balanceAccount))
+                .accountBalance(Double.valueOf(accountBalance))
                 .build();
-        accountService.createAccount(accountForCreation)
+        accountService.create(accountForCreation)
                 .ifPresentOrElse(
                         account -> redirectToAccountPage(req, resp, account),
                         () -> onFailedCreation(req, resp)
@@ -53,7 +56,7 @@ public class AccountServlet extends HttpServlet {
     }
 
     @SneakyThrows
-    private static void redirectToAccountPage(HttpServletRequest req, HttpServletResponse resp, Account account) {
+    private static void redirectToAccountPage(HttpServletRequest req, HttpServletResponse resp, AccountEntity account) {
         req.setAttribute("account", account);
         req.getRequestDispatcher(PagesUtil.ACCOUNT).forward(req, resp);
     }

@@ -40,12 +40,12 @@
     <option value="FEMALE">FEMALE</option>
   </select><br>
 
-  <label for="rolesId">Укажите Вашу роль:</label><br>
+<%--  <label for="rolesId">Укажите Вашу роль:</label><br>--%>
 
-  <select name="roles" id="rolesId">
-    <option value="USER">USER</option>
-    <option value="ADMIN">ADMIN</option>
-  </select><br>
+<%--  <select name="roles" id="rolesId">--%>
+<%--    <option value="USER">USER</option>--%>
+<%--    <option value="ADMIN">ADMIN</option>--%>
+<%--  </select><br>--%>
   <br>
 
   <input type="submit" value="Submit">
