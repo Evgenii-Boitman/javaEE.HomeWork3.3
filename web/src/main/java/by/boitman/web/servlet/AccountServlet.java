@@ -2,6 +2,7 @@ package by.boitman.web.servlet;
 
 import by.boitman.database.dto.AccountFilter;
 import by.boitman.database.entity.AccountEntity;
+import by.boitman.database.entity.enam.Gender;
 import by.boitman.service.AccountService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -21,13 +22,13 @@ public class AccountServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String id = req.getParameter("id");
         if (id == null) {
-            req.setAttribute("accounts", accountService.getFindByFilter(
+            req.setAttribute("account", accountService.getFindByFilter(
                     AccountFilter.builder()
                             .accountBalance(Double.valueOf(req.getParameter("account_balance")))
+                            .userName(req.getParameter("name"))
                             .limit(Integer.parseInt(req.getParameter("limit")))
                             .page(Integer.parseInt(req.getParameter("page")))
                             .build()
-
             ));
             req.getRequestDispatcher(PagesUtil.ACCOUNTS).forward(req, resp);
         } else {
@@ -39,11 +40,13 @@ public class AccountServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String ownerNameAccount = req.getParameter("name");
         String ownerSurnameAccount = req.getParameter("surname");
+        String gender =req.getParameter("gender");
         String numberAccount = req.getParameter("number_account");
         String accountBalance = req.getParameter("account_balance");
         AccountEntity accountForCreation = AccountEntity.builder()
                 .ownerNameAccount(ownerNameAccount)
                 .ownerSurnameAccount(ownerSurnameAccount)
+                .gender(Gender.valueOf(gender))
                 .numberAccount(Long.valueOf(numberAccount))
                 .accountBalance(Double.valueOf(accountBalance))
                 .build();

@@ -2,9 +2,7 @@ package by.boitman.database.entity;
 
 import by.boitman.database.entity.enam.Gender;
 import by.boitman.database.entity.enam.Role;
-import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.Column;
-import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -57,13 +55,13 @@ public class UserEntity extends CreatableEntity<Long> {
     @Column(name = "role", length = 10)
     private Role role;
 
-    @Embedded
-    @AttributeOverride(name = "tel", column = @Column(name = "tel"))
+//    @Embedded
+//    @AttributeOverride(name = "tel", column = @Column(name = "telefon"))
     private String contact;
 
     @Builder.Default
     @ManyToMany
-    @JoinTable(name = "acount_card_user)",
+    @JoinTable(name = "acount_owner",
             joinColumns = {
                     @JoinColumn(name = "account_id")
             },
@@ -72,14 +70,14 @@ public class UserEntity extends CreatableEntity<Long> {
             })
     private List<AccountEntity> accounts = new ArrayList<>();
 
-    @Builder.Default
-    @ManyToMany
-    @JoinTable(name = "acount_card_user)",
-            joinColumns = {
-                    @JoinColumn(name = "card_id")
-            },
-            inverseJoinColumns = {
-                    @JoinColumn(name = "user_id")
-            })
-    private List<CardEntity> cards = new ArrayList<>();
+//    @Builder.Default
+//    @ManyToMany
+//    @JoinTable(name = "acount_card_owner",
+//            joinColumns = {
+//                    @JoinColumn(name = "card_id")
+//            },
+//            inverseJoinColumns = {
+//                    @JoinColumn(name = "user_id")
+//            })
+//    private List<CardEntity> cards = new ArrayList<>();
 }

@@ -2,7 +2,7 @@ DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS account;
 DROP TABLE IF EXISTS card;
 DROP TABLE IF EXISTS contact;
-DROP TABLE IF EXISTS account_card_owner;
+DROP TABLE IF EXISTS account_owner;
 
 CREATE TABLE users
 (
@@ -22,8 +22,10 @@ CREATE TABLE account
     id              BIGSERIAL PRIMARY KEY,
     name            VARCHAR(50) NOT NULL,
     surname         VARCHAR(50) NOT NULL,
+    gender          VARCHAR(10) NOT NULL,
     number_account  BIGSERIAL   NOT NULL,
-    account_balance NUMERIC
+    account_balance NUMERIC,
+    created_at      TIMESTAMP   NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE card
@@ -32,7 +34,8 @@ CREATE TABLE card
     name         VARCHAR(50) NOT NULL,
     surname      VARCHAR(50) NOT NULL,
     card_number  BIGSERIAL   NOT NULL,
-    card_balance NUMERIC
+    card_balance NUMERIC,
+    created_at   TIMESTAMP   NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE contact
@@ -41,9 +44,8 @@ CREATE TABLE contact
     tel     VARCHAR(20) NOT NULL UNIQUE
 );
 
-CREATE TABLE account_card_owner
+CREATE TABLE account_owner
 (
     account_id BIGINT REFERENCES account (id),
-    card_id    BIGINT REFERENCES card (id),
     user_id    BIGINT REFERENCES users (id)
 );

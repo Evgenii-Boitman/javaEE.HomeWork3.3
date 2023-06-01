@@ -17,7 +17,7 @@ import static lombok.AccessLevel.PRIVATE;
 @NoArgsConstructor(access = PRIVATE)
 public class AccountService {
     private static final AccountService INSTANCE = new AccountService();
-    private static final AccountDao ACCOUNT_DAO = AccountDao.getInstance();
+    private final AccountDao ACCOUNT_DAO = AccountDao.getInstance();
     private final HibernateFactory hibernateFactory = HibernateFactory.getInstance();
 
     public List<AccountEntity> getAll() {

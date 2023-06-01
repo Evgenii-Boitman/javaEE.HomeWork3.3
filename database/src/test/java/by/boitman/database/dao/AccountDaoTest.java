@@ -1,8 +1,9 @@
 package by.boitman.database.dao;
 
+import by.boitman.database.TestDataImporter;
 import by.boitman.database.dto.AccountDto;
+import by.boitman.database.dto.AccountFilter;
 import by.boitman.database.entity.AccountEntity;
-import by.boitman.database.entity.enam.Gender;
 import by.boitman.database.hibernate.HibernateFactory;
 import lombok.Cleanup;
 import org.hibernate.Session;
@@ -13,8 +14,11 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
 import java.util.List;
+import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static by.boitman.database.entity.enam.Gender.FEMALE;
+import static by.boitman.database.entity.enam.Gender.MALE;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -40,21 +44,21 @@ class AccountDaoTest {
                 .stream()
                 .map(AccountEntity::getOwnerNameAccount)
                 .toArray(String[]::new);
-        String[] expected = List.of("Petr", "Nikolai")
+        String[] expected = List.of("Nikolai", "Petr")
                 .toArray(String[]::new);
         assertArrayEquals(expected, actual);
     }
 
     @Test
     @Order(2)
-    void whenFindAllDtosInvoked_ThenAllTheBooksDtosAreReturned() {
+    void whenFindAllDtosInvoked_ThenAllTheAccountsDtosAreReturned() {
         @Cleanup Session session = sessionFactory.getSession();
         AccountDto[] actual = accountDao.findAllDtos(session).toArray(AccountDto[]::new);
         AccountDto[] expected = accountDao.findAll(session)
                 .stream()
                 .map(account -> new AccountDto(account.getNumberAccount(),
                         account.getUsers().size() > 0
-                                ? account.getUsers().get(0).getSurname()
+                                ? account.getUsers().get(0).getName()
                                 : null))
                 .toArray(AccountDto[]::new);
         assertArrayEquals(expected, actual);
@@ -64,11 +68,11 @@ class AccountDaoTest {
     @Order(3)
     void whenFindAllByGenderInvoked_ThenAllTheAccountsOfGenderAreReturned() {
         @Cleanup Session session = sessionFactory.getSession();
-        String[] actual = accountDao.findAllByGender(session, Gender.MALE)
+        String[] actual = accountDao.findAllByGender(session, MALE)
                 .stream()
-                .map(AccountEntity::getOwnerNameAccount)
+                .map(AccountEntity::getOwnerSurnameAccount)
                 .toArray(String[]::new);
-        String[] expected = List.of("Petr", "Nikolai")
+        String[] expected = List.of("Petrov")
                 .toArray(String[]::new);
         assertArrayEquals(expected, actual);
     }
@@ -79,72 +83,74 @@ class AccountDaoTest {
         @Cleanup Session session = sessionFactory.getSession();
         String[] actual = accountDao.findAllByUser(session, "Petr")
                 .stream()
-                .map(AccountEntity::getNumberAccount)
+                .map(AccountEntity::getOwnerSurnameAccount)
                 .toArray(String[]::new);
-        String[] expected = List.of("123")
+        String[] expected = List.of("Petrov")
                 .toArray(String[]::new);
         assertArrayEquals(expected, actual);
     }
 
-//    @Test
-//    @Order(5)
-//    void whenFindAllByFilterContainsOnlyAuthorInvoked_ThenAllTheFilteredByAuthorBooksAreReturned() {
-//        @Cleanup Session session = sessionFactory.getSession();
-//        BookFilter filter = BookFilter.builder()
-//                .authorName("Leo Tolstoi")
-//                .build();
-//        String[] actual = bookDao.findByFilter(session, filter)
-//                .stream()
-//                .map(BookEntity::getTitle)
-//                .toArray(String[]::new);
-//        String[] expected = List.of("Anna Karenina", "War and Peace")
-//                .toArray(String[]::new);
-//        assertArrayEquals(expected, actual);
-//    }
-//
-//    @Test
-//    @Order(6)
-//    void whenFindAllByFilterContainsAuthorAndPagesInvoked_ThenAllTheFilteredByAuthorAndPagesBooksAreReturned() {
-//        @Cleanup Session session = sessionFactory.getSession();
-//        BookFilter filter = BookFilter.builder()
-//                .authorName("Leo Tolstoi")
-//                .pagesAmount(1000)
-//                .build();
-//        String[] actual = bookDao.findByFilter(session, filter)
-//                .stream()
-//                .map(BookEntity::getTitle)
-//                .toArray(String[]::new);
-//        String[] expected = List.of("Anna Karenina")
-//                .toArray(String[]::new);
-//        assertArrayEquals(expected, actual);
-//    }
-//
-//    @Test
-//    @Order(7)
-//    void whenFindById_ThenAllTheFilteredReturnsValidBook() {
-//        @Cleanup Session session = sessionFactory.getSession();
-//        Optional<BookEntity> actual = bookDao.findById(session, 1L);
-//        assertTrue(actual.isPresent());
-//        assertEquals("Anna Karenina", actual.get().getTitle());
-//    }
-//
-//    @Test
-//    @Order(8)
-//    void whenCreatedInvokedWithBook_ThenBookIsSaved() {
-//        BookEntity testBook = BookEntity.builder()
-//                .title("Test")
-//                .genre(CLASSIC)
-//                .pages(200)
-//                .build();
-//
-//        @Cleanup Session session = sessionFactory.getSession();
-//        var transaction = session.beginTransaction();
-//        Optional<BookEntity> bookEntity = bookDao.create(session, testBook);
-//        transaction.commit();
-//
-//        List<String> allTitles = bookDao.findAll(session).stream()
-//                .map(BookEntity::getTitle)
-//                .toList();
-//        assertTrue(allTitles.contains(testBook.getTitle()));
-//    }
+    @Test
+    @Order(5)
+    void whenFindAllByFilterContainsOnlyUserInvoked_ThenAllTheFilteredByUserAccountAreReturned() {
+        @Cleanup Session session = sessionFactory.getSession();
+        AccountFilter filter = AccountFilter.builder()
+                .userName("Petr")
+                .build();
+        Double[] actual = accountDao.findByFilter(session, filter)
+                .stream()
+                .map(AccountEntity::getAccountBalance)
+                .toArray(Double[]::new);
+        Double[] expected = List.of(1000.5)
+                .toArray(Double[]::new);
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    @Order(6)
+    void whenFindAllByFilterContainsUserAndBalanceInvoked_ThenAllTheFilteredByUserAndBalanceAccountAreReturned() {
+        @Cleanup Session session = sessionFactory.getSession();
+        AccountFilter filter = AccountFilter.builder()
+                .userName("Petr")
+                .accountBalance(1000.5)
+                .build();
+        String[] actual = accountDao.findByFilter(session, filter)
+                .stream()
+                .map(AccountEntity::getOwnerSurnameAccount)
+                .toArray(String[]::new);
+        String[] expected = List.of("Petrov")
+                .toArray(String[]::new);
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    @Order(7)
+    void whenFindById_ThenAllTheFilteredReturnsValidAccount() {
+        @Cleanup Session session = sessionFactory.getSession();
+        Optional<AccountEntity> actual = accountDao.findById(session, 2L);
+        assertTrue(actual.isPresent());
+        assertEquals("Petrov", actual.get().getOwnerSurnameAccount());
+    }
+
+    @Test
+    @Order(8)
+    void whenCreatedInvokedWithAccount_ThenAccountIsSaved() {
+        AccountEntity testAccount = AccountEntity.builder()
+                .ownerNameAccount("Test")
+                .ownerSurnameAccount("Testov")
+                .gender(FEMALE)
+                .numberAccount(1L)
+                .accountBalance(9999.9)
+                .build();
+
+        @Cleanup Session session = sessionFactory.getSession();
+        var transaction = session.beginTransaction();
+        Optional<AccountEntity> accountEntity = accountDao.create(session, testAccount);
+        transaction.commit();
+
+        List<String> allNames = accountDao.findAll(session).stream()
+                .map(AccountEntity::getOwnerNameAccount)
+                .toList();
+        assertTrue(allNames.contains(testAccount.getOwnerNameAccount()));
+    }
 }

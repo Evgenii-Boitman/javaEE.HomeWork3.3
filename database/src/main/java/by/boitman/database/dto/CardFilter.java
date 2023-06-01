@@ -10,6 +10,7 @@ import lombok.Data;
 public class CardFilter {
     private Double balance;
     private Integer limit;
+    private String ownerName;
     private Integer page;
     public Integer getLimit() {
         return limit == null ? 10 : limit;

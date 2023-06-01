@@ -4,6 +4,9 @@ package by.boitman.database.dao;
 import by.boitman.database.dto.AccountDto;
 import by.boitman.database.entity.AccountEntity;
 import by.boitman.database.dto.AccountFilter;
+
+import by.boitman.database.entity.AccountEntity_;
+import by.boitman.database.entity.UserEntity_;
 import by.boitman.database.entity.enam.Gender;
 import jakarta.persistence.criteria.JoinType;
 import jakarta.persistence.criteria.Predicate;
@@ -15,6 +18,8 @@ import org.hibernate.query.criteria.JpaRoot;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
 public final class AccountDao extends Dao<Long, AccountEntity> {
     private static final AccountDao INSTANCE = new AccountDao();
     private AccountDao() {
@@ -25,8 +30,8 @@ public final class AccountDao extends Dao<Long, AccountEntity> {
     public List<AccountDto> findAllDtos(Session session) {
         JpaCriteriaQuery<AccountDto> query = session.getCriteriaBuilder().createQuery(AccountDto.class);
         JpaRoot<AccountEntity> accountRoot = query.from(AccountEntity.class);
-        JpaJoin<Object, Object> users = accountRoot.join(String.valueOf(AccountEntity.class), JoinType.LEFT);
-        query.multiselect(accountRoot.get("numberAccount"), users.get("surname"));
+        JpaJoin<Object, Object> users = accountRoot.join(AccountEntity_.USERS, JoinType.LEFT);
+        query.multiselect(accountRoot.get(AccountEntity_.NUMBER_ACCOUNT), users.get(UserEntity_.NAME));
         return session.createQuery(query).list();
     }
 
@@ -35,7 +40,7 @@ public final class AccountDao extends Dao<Long, AccountEntity> {
         JpaCriteriaQuery<AccountEntity> query = cb.createQuery(AccountEntity.class);
         JpaRoot<AccountEntity> accountRoot = query.from(AccountEntity.class);
         query.select(accountRoot);
-        query.where(cb.equal(accountRoot.get("gender"), gender));
+        query.where(cb.equal(accountRoot.get(AccountEntity_.GENDER), gender));
         return session.createQuery(query).list();
     }
 
@@ -44,8 +49,8 @@ public final class AccountDao extends Dao<Long, AccountEntity> {
         JpaCriteriaQuery<AccountEntity> query = cb.createQuery(AccountEntity.class);
         JpaRoot<AccountEntity> accountRoot = query.from(AccountEntity.class);
         query.select(accountRoot);
-        JpaJoin<Object, Object> users = accountRoot.join(String.valueOf(AccountEntity.class), JoinType.LEFT);
-        query.where(cb.equal(users.get("name"), name));
+        JpaJoin<Object, Object> users = accountRoot.join(AccountEntity_.USERS);
+        query.where(cb.equal(users.get(UserEntity_.NAME), name));
         return session.createQuery(query).list();
     }
     public List<AccountEntity> findByFilter(Session session, AccountFilter filter) {
@@ -53,7 +58,7 @@ public final class AccountDao extends Dao<Long, AccountEntity> {
         JpaCriteriaQuery<AccountEntity> query = cb.createQuery(AccountEntity.class);
         JpaRoot<AccountEntity> accountRoot = query.from(AccountEntity.class);
         query.select(accountRoot);
-        JpaJoin<Object, Object> users = accountRoot.join("name");
+        JpaJoin<Object, Object> users = accountRoot.join(AccountEntity_.USERS);
         query.where(collectPredicates(filter, cb, accountRoot, users).toArray(Predicate[]::new));
 
         return session.createQuery(query)

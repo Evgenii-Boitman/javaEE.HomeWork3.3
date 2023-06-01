@@ -1,4 +1,4 @@
-package by.boitman.database.dao;
+package by.boitman.database;
 
 import by.boitman.database.entity.AccountEntity;
 import by.boitman.database.entity.UserEntity;
@@ -6,6 +6,10 @@ import by.boitman.database.entity.enam.Gender;
 import by.boitman.database.entity.enam.Role;
 import lombok.experimental.UtilityClass;
 import org.hibernate.Session;
+
+import static by.boitman.database.entity.enam.Gender.FEMALE;
+import static by.boitman.database.entity.enam.Gender.MALE;
+import static by.boitman.database.entity.enam.Role.USER;
 
 @UtilityClass
 public class TestDataImporter {
@@ -16,8 +20,8 @@ public class TestDataImporter {
                 .surname("Petrov")
                 .email("petrpetrov@gmail.com")
                 .password("petrpetrov")
-                .gender(Gender.MALE)
-                .role(Role.USER)
+                .gender(MALE)
+                .role(USER)
                 .contact("+375441000003")
                 .build();
 
@@ -28,8 +32,8 @@ public class TestDataImporter {
                 .surname("Nikolaev")
                 .email("nikolainikolaev@gmail.com")
                 .password("nikolainikolaev")
-                .gender(Gender.MALE)
-                .role(Role.USER)
+                .gender(MALE)
+                .role(USER)
                 .contact("+375441000004")
                 .build();
 
@@ -38,6 +42,7 @@ public class TestDataImporter {
         var accountPetrov = AccountEntity.builder()
                 .ownerNameAccount("Petr")
                 .ownerSurnameAccount("Petrov")
+                .gender(MALE)
                 .numberAccount(1L)
                 .accountBalance(1000.5)
                 .build();
@@ -45,6 +50,7 @@ public class TestDataImporter {
         var accountNikolaev = AccountEntity.builder()
                 .ownerNameAccount("Nikolai")
                 .ownerSurnameAccount("Nikolaev")
+                .gender(FEMALE)
                 .numberAccount(2L)
                 .accountBalance(90.5)
                 .build();

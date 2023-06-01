@@ -1,7 +1,10 @@
 package by.boitman.database.entity;
 
+import by.boitman.database.entity.enam.Gender;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -35,6 +38,10 @@ public class AccountEntity extends CreatableEntity<Long> {
     @Column(name = "surname", length = 50, nullable = false)
     private String ownerSurnameAccount;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "gender", length = 10, nullable = false)
+    private Gender gender;
+
     @Column(name = "number_account", nullable = false)
     private Long numberAccount;
 
@@ -54,4 +61,5 @@ public class AccountEntity extends CreatableEntity<Long> {
         this.getUsers().remove(user);
         user.getAccounts().remove(this);
     }
+
 }
