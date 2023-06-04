@@ -1,7 +1,10 @@
 package by.boitman.database.dao;
 
+
+import by.boitman.database.dto.CardDto;
 import by.boitman.database.dto.CardFilter;
-import by.boitman.database.entity.CardEntity;
+import by.boitman.database.entity.*;
+import jakarta.persistence.criteria.JoinType;
 import jakarta.persistence.criteria.Predicate;
 import org.hibernate.Session;
 import org.hibernate.query.criteria.HibernateCriteriaBuilder;
@@ -13,29 +16,35 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
 public final class CardDao extends Dao<Long, CardEntity> {
     private static final CardDao INSTANCE = new CardDao();
 
     private CardDao() {
         super(CardEntity.class);
     }
+    public List<CardDto> findAllDtos(Session session) {
+        JpaCriteriaQuery<CardDto> query = session.getCriteriaBuilder().createQuery(CardDto.class);
+        JpaRoot<CardEntity> cardRoot = query.from(CardEntity.class);
+        JpaJoin<Object, Object> users = cardRoot.join(CardEntity_.USERS, JoinType.LEFT);
+        query.multiselect(cardRoot.get(CardEntity_.CARD_NUMBER), users.get(UserEntity_.NAME));
+        return session.createQuery(query).list();
+    }
 
-    public List<CardEntity> findAllByName(Session session, String name) {
+    public List<CardEntity> findAllByUser(Session session, String name) {
         HibernateCriteriaBuilder cb = session.getCriteriaBuilder();
         JpaCriteriaQuery<CardEntity> query = cb.createQuery(CardEntity.class);
         JpaRoot<CardEntity> cardRoot = query.from(CardEntity.class);
         query.select(cardRoot);
-        query.where(cb.equal(cardRoot.get("name"), name));
+        JpaJoin<Object, Object> users = cardRoot.join(AccountEntity_.USERS);
+        query.where(cb.equal(users.get(UserEntity_.NAME), name));
         return session.createQuery(query).list();
     }
-
     public List<CardEntity> findByFilter(Session session, CardFilter filter) {
         HibernateCriteriaBuilder cb = session.getCriteriaBuilder();
         JpaCriteriaQuery<CardEntity> query = cb.createQuery(CardEntity.class);
         JpaRoot<CardEntity> cardRoot = query.from(CardEntity.class);
         query.select(cardRoot);
-        JpaJoin<Object, Object> users = cardRoot.join("name");
+        JpaJoin<Object, Object> users = cardRoot.join(CardEntity_.USERS);
         query.where(collectPredicates(filter, cb, cardRoot, users).toArray(Predicate[]::new));
 
         return session.createQuery(query)

@@ -70,14 +70,14 @@ public class UserEntity extends CreatableEntity<Long> {
             })
     private List<AccountEntity> accounts = new ArrayList<>();
 
-//    @Builder.Default
-//    @ManyToMany
-//    @JoinTable(name = "acount_card_owner",
-//            joinColumns = {
-//                    @JoinColumn(name = "card_id")
-//            },
-//            inverseJoinColumns = {
-//                    @JoinColumn(name = "user_id")
-//            })
-//    private List<CardEntity> cards = new ArrayList<>();
+    @Builder.Default
+    @ManyToMany
+    @JoinTable(name = "acount_card_owner",
+            joinColumns = {
+                    @JoinColumn(name = "card_id")
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(name = "user_id")
+            })
+    private List<CardEntity> cards = new ArrayList<>();
 }

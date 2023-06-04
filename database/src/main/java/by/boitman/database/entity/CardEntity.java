@@ -5,13 +5,16 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Data
@@ -40,17 +43,17 @@ public class CardEntity extends CreatableEntity<Long> {
     @Column(name = "card_balance", nullable = false)
     private Double balance;
 
-//    @Builder.Default
-//    @ManyToMany(mappedBy = "cards")
-//    private List<UserEntity> users = new ArrayList<>();
+    @Builder.Default
+    @ManyToMany(mappedBy = "cards")
+    private List<UserEntity> users = new ArrayList<>();
 
-//    public void addUser(UserEntity user) {
-//        this.getUsers().add(user);
-//        user.getCards().add(this);
-//    }
-//
-//    public void removeUser(UserEntity user) {
-//        this.getUsers().remove(user);
-//        user.getCards().remove(this);
-//    }
+    public void addUser(UserEntity user) {
+        this.getUsers().add(user);
+        user.getCards().add(this);
+    }
+
+    public void removeUser(UserEntity user) {
+        this.getUsers().remove(user);
+        user.getCards().remove(this);
+    }
 }
