@@ -2,7 +2,7 @@ DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS account;
 DROP TABLE IF EXISTS card;
 DROP TABLE IF EXISTS contact;
-DROP TABLE IF EXISTS account_owner;
+DROP TABLE IF EXISTS account_card_owner;
 
 CREATE TABLE users
 (
@@ -14,7 +14,7 @@ CREATE TABLE users
     gender     VARCHAR(10)        NOT NULL,
     role       VARCHAR(10)        NOT NULL,
     contact    VARCHAR(30)        NULL,
-    created_at TIMESTAMP          NOT NULL DEFAULT CURRENT_TIMESTAMP
+    created_at DATE               NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE account
@@ -24,8 +24,8 @@ CREATE TABLE account
     surname         VARCHAR(50) NOT NULL,
     gender          VARCHAR(10) NOT NULL,
     number_account  BIGSERIAL   NOT NULL,
-    account_balance NUMERIC,
-    created_at      TIMESTAMP   NOT NULL DEFAULT CURRENT_TIMESTAMP
+    account_balance FLOAT,
+    created_at      DATE        NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE card
@@ -34,8 +34,8 @@ CREATE TABLE card
     name         VARCHAR(50) NOT NULL,
     surname      VARCHAR(50) NOT NULL,
     card_number  BIGSERIAL   NOT NULL,
-    card_balance NUMERIC,
-    created_at   TIMESTAMP   NOT NULL DEFAULT CURRENT_TIMESTAMP
+    card_balance FLOAT,
+    created_at   DATE        NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE contact
@@ -44,8 +44,9 @@ CREATE TABLE contact
     tel     VARCHAR(20) NOT NULL UNIQUE
 );
 
-CREATE TABLE account_owner
+CREATE TABLE account_card_owner
 (
     account_id BIGINT REFERENCES account (id),
-    user_id    BIGINT REFERENCES users (id)
+    user_id    BIGINT REFERENCES users (id),
+    card_id    BIGINT REFERENCES card (id)
 );

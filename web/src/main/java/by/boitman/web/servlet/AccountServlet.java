@@ -48,7 +48,7 @@ public class AccountServlet extends HttpServlet {
                 .ownerSurnameAccount(ownerSurnameAccount)
                 .gender(Gender.valueOf(gender))
                 .numberAccount(Long.valueOf(numberAccount))
-                .accountBalance(Double.valueOf(accountBalance))
+                .accountBalance(Float.valueOf(accountBalance))
                 .build();
         accountService.create(accountForCreation)
                 .ifPresentOrElse(

@@ -13,7 +13,7 @@ import by.boitman.web.util.PagesUtil;
 import java.io.IOException;
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
-    private UserService userService = UserService.getInstance();
+    private final UserService userService = UserService.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

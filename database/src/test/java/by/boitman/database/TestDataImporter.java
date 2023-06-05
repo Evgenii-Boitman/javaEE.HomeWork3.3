@@ -44,7 +44,7 @@ public class TestDataImporter {
                 .ownerSurnameAccount("Petrov")
                 .gender(MALE)
                 .numberAccount(1L)
-                .accountBalance(1000.5)
+                .accountBalance(1000.5f)
                 .build();
 
         var accountNikolaev = AccountEntity.builder()
@@ -52,7 +52,7 @@ public class TestDataImporter {
                 .ownerSurnameAccount("Nikolaev")
                 .gender(FEMALE)
                 .numberAccount(2L)
-                .accountBalance(90.5)
+                .accountBalance(90.5f)
                 .build();
 
 

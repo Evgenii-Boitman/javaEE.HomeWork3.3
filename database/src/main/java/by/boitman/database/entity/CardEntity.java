@@ -41,7 +41,7 @@ public class CardEntity extends CreatableEntity<Long> {
     private Long cardNumber;
 
     @Column(name = "card_balance", nullable = false)
-    private Double balance;
+    private Float balance;
 
     @Builder.Default
     @ManyToMany(mappedBy = "cards")

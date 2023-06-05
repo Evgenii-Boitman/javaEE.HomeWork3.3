@@ -61,7 +61,7 @@ public class UserEntity extends CreatableEntity<Long> {
 
     @Builder.Default
     @ManyToMany
-    @JoinTable(name = "acount_owner",
+    @JoinTable(name = "account_card_owner",
             joinColumns = {
                     @JoinColumn(name = "account_id")
             },
@@ -70,9 +70,10 @@ public class UserEntity extends CreatableEntity<Long> {
             })
     private List<AccountEntity> accounts = new ArrayList<>();
 
+
     @Builder.Default
     @ManyToMany
-    @JoinTable(name = "acount_card_owner",
+    @JoinTable(name = "account_card_owner",
             joinColumns = {
                     @JoinColumn(name = "card_id")
             },

@@ -46,7 +46,7 @@ public class AccountEntity extends CreatableEntity<Long> {
     private Long numberAccount;
 
     @Column(name = "account_balance", nullable = false)
-    private Double accountBalance;
+    private Float accountBalance;
 
     @Builder.Default
     @ManyToMany(mappedBy = "accounts")

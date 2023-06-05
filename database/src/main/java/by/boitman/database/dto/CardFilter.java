@@ -8,9 +8,9 @@ import lombok.Data;
 @Builder
 @AllArgsConstructor
 public class CardFilter {
-    private Double balance;
-    private Integer limit;
+    private Float balance;
     private String ownerName;
+    private Integer limit;
     private Integer page;
     public Integer getLimit() {
         return limit == null ? 10 : limit;

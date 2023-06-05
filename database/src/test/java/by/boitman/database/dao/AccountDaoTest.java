@@ -4,6 +4,7 @@ import by.boitman.database.TestDataImporter;
 import by.boitman.database.dto.AccountDto;
 import by.boitman.database.dto.AccountFilter;
 import by.boitman.database.entity.AccountEntity;
+import by.boitman.database.entity.CardEntity;
 import by.boitman.database.hibernate.HibernateFactory;
 import lombok.Cleanup;
 import org.hibernate.Session;
@@ -25,6 +26,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class AccountDaoTest {
 
     private static final AccountDao accountDao = AccountDao.getInstance();
+    private static final CardDao cardDao = CardDao.getInstance();
     private static final HibernateFactory sessionFactory = HibernateFactory.getInstance();
 
     @BeforeAll
@@ -140,17 +142,29 @@ class AccountDaoTest {
                 .ownerSurnameAccount("Testov")
                 .gender(FEMALE)
                 .numberAccount(1L)
-                .accountBalance(9999.9)
+                .accountBalance(9999.9f)
+                .build();
+        CardEntity testCard = CardEntity.builder()
+                .ownerName("Test")
+                .ownerSurname("Testov")
+                .cardNumber(1L)
+                .balance(123213f)
                 .build();
 
         @Cleanup Session session = sessionFactory.getSession();
         var transaction = session.beginTransaction();
         Optional<AccountEntity> accountEntity = accountDao.create(session, testAccount);
+        Optional<CardEntity> cardEntity = cardDao.create(session, testCard);
         transaction.commit();
 
         List<String> allNames = accountDao.findAll(session).stream()
                 .map(AccountEntity::getOwnerNameAccount)
                 .toList();
         assertTrue(allNames.contains(testAccount.getOwnerNameAccount()));
+
+//        List<String> allNames2 = cardDao.findAll(session).stream()
+//                .map(CardEntity::getOwnerName)
+//                .toList();
+//        assertTrue(allNames2.contains(testCard.getOwnerName()));
     }
 }

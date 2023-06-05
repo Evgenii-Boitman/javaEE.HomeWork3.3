@@ -20,7 +20,7 @@ import static by.boitman.service.UserService.getInstance;
 @WebServlet("/registration")
 public class RegistrationServlet extends HttpServlet {
 
-    private UserService userService = getInstance();
+    private final UserService userService = getInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -31,13 +31,15 @@ public class RegistrationServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         Optional<UserEntity> saved = userService.save(
                 UserEntity.builder()
-                        .email(req.getParameter("email"))
-                        .password(req.getParameter("password"))
                         .name(req.getParameter("name"))
                         .surname(req.getParameter("surname"))
+                        .email(req.getParameter("email"))
+                        .password(req.getParameter("password"))
                         .gender(Gender.valueOf(req.getParameter("gender")))
-//                        .role(Role.valueOf(req.getParameter("roles")))
+                        .contact(req.getParameter("contact"))
+                        .role(Role.valueOf(req.getParameter("roles")))
                         .build());
         resp.sendRedirect("/login");
+        System.out.println(saved);
     }
 }

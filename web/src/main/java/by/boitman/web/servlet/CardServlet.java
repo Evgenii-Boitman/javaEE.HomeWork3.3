@@ -24,10 +24,10 @@ public class CardServlet extends HttpServlet {
         if (id == null) {
             req.setAttribute("cards", cardService.getFindByFilter(
                     CardFilter.builder()
-                            .balance(Double.valueOf(req.getParameter("card_balance")))
+                            .balance(Float.valueOf(req.getParameter("card_balance")))
                             .ownerName(req.getParameter("name"))
-                            .limit(Integer.parseInt(req.getParameter("limit")))
-                            .page(Integer.parseInt(req.getParameter("page")))
+                            .limit(Integer.valueOf(req.getParameter("limit")))
+                            .page(Integer.valueOf(req.getParameter("page")))
                             .build()
 
             ));
@@ -47,7 +47,7 @@ public class CardServlet extends HttpServlet {
                 .ownerName(ownerName)
                 .ownerSurname(ownerSurname)
                 .cardNumber(Long.valueOf(cardNumber))
-                .balance(Double.valueOf(balance))
+                .balance(Float.valueOf(balance))
                 .build();
         cardService.create(cardForCreation)
                 .ifPresentOrElse(
