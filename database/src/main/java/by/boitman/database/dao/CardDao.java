@@ -63,9 +63,9 @@ public final class CardDao extends Dao<Long, CardEntity> {
         if (filter.getBalance() != null) {
             predicates.add(cb.le(cardRoot.get(CardEntity_.BALANCE), filter.getBalance()));
         }
-        if (filter.getOwnerName() != null) {
-            predicates.add(cb.equal(cardRoot.get(CardEntity_.OWNER_NAME), filter.getOwnerName()));
-        }
+//        if (filter.getOwnerName() != null) {
+//            predicates.add(cb.equal(cardRoot.get(CardEntity_.OWNER_NAME), filter.getOwnerName()));
+//        }
         return predicates;
     }
 

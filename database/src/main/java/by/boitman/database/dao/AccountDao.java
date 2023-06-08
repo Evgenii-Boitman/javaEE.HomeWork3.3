@@ -4,7 +4,6 @@ package by.boitman.database.dao;
 import by.boitman.database.dto.AccountDto;
 import by.boitman.database.entity.AccountEntity;
 import by.boitman.database.dto.AccountFilter;
-
 import by.boitman.database.entity.AccountEntity_;
 import by.boitman.database.entity.UserEntity_;
 import by.boitman.database.entity.enam.Gender;
@@ -67,10 +66,13 @@ public final class AccountDao extends Dao<Long, AccountEntity> {
                 .list();
     }
 
-    private static List<Predicate> collectPredicates(AccountFilter filter, HibernateCriteriaBuilder cb, JpaRoot<AccountEntity> cardRoot, JpaJoin<Object, Object> users) {
+    private static List<Predicate> collectPredicates(AccountFilter filter, HibernateCriteriaBuilder cb, JpaRoot<AccountEntity> accountRoot, JpaJoin<Object, Object> users) {
         List<Predicate> predicates = new ArrayList<>();
         if (filter.getAccountBalance() != null) {
-            predicates.add(cb.le(cardRoot.get("accountBalance"), filter.getAccountBalance()));
+            predicates.add(cb.le(accountRoot.get(AccountEntity_.ACCOUNT_BALANCE), filter.getAccountBalance()));
+        }
+        if (filter.getUserName() != null) {
+            predicates.add(cb.equal(accountRoot.get(AccountEntity_.OWNER_NAME_ACCOUNT), filter.getUserName()));
         }
         return predicates;
     }

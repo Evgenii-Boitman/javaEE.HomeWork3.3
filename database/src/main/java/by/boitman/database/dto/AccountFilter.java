@@ -9,15 +9,19 @@ import lombok.Data;
 @AllArgsConstructor
 public class AccountFilter {
 
-    private Double accountBalance;
-    private Integer limit;
+    private String accountBalance;
+    private String limit;
     private String userName;
-    private Integer page;
+    private String page;
+    public Float getAccountBalance() {
+        return accountBalance == null ? 0.0f : Float.parseFloat(accountBalance);
+    }
+
     public Integer getLimit() {
-        return limit == null ? 10 : limit;
+        return limit == null ? 10 : Integer.parseInt(limit);
     }
 
     public Integer getOffset() {
-        return page == null ? 0 : limit * (page - 1);
+        return page == null ? 0 : this.getLimit() * (Integer.parseInt(page) - 1);
     }
 }

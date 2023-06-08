@@ -28,7 +28,7 @@ public abstract class Dao<K extends Serializable, E extends BaseEntity<K>> {
         return Optional.ofNullable(entity);
     }
 
-    Optional<E> update(Session session, E entity) {
+    public Optional<E> update(Session session, E entity) {
         session.merge(entity);
         return Optional.ofNullable(entity);
     }

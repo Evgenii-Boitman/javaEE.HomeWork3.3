@@ -48,5 +48,5 @@ CREATE TABLE account_card_owner
 (
     account_id BIGINT REFERENCES account (id),
     user_id    BIGINT REFERENCES users (id),
-    card_id    BIGINT REFERENCES card (id)
+    card_id BIGINT REFERENCES card(id)
 );

@@ -8,14 +8,19 @@ import lombok.Data;
 @Builder
 @AllArgsConstructor
 public class CardFilter {
-    private Float balance;
+    private String balance;
     private String ownerName;
-    private Integer limit;
-    private Integer page;
-    public Integer getLimit() {
-        return limit == null ? 10 : limit;
+    private String limit;
+    private String page;
+    public Float getBalance() {
+        return balance == null ? 0.0f : Float.parseFloat(balance);
     }
+
+    public Integer getLimit() {
+        return limit == null ? 10 : Integer.parseInt(limit);
+    }
+
     public Integer getOffset() {
-        return page == null ? 0 : limit * (page - 1);
+        return page == null ? 0 : this.getLimit() * (Integer.parseInt(page) - 1);
     }
 }

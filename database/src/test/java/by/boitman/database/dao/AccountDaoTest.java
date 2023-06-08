@@ -99,12 +99,12 @@ class AccountDaoTest {
         AccountFilter filter = AccountFilter.builder()
                 .userName("Petr")
                 .build();
-        Double[] actual = accountDao.findByFilter(session, filter)
+        Float[] actual = accountDao.findByFilter(session, filter)
                 .stream()
                 .map(AccountEntity::getAccountBalance)
-                .toArray(Double[]::new);
-        Double[] expected = List.of(1000.5)
-                .toArray(Double[]::new);
+                .toArray(Float[]::new);
+        Float[] expected = List.of(1000.5f)
+                .toArray(Float[]::new);
         assertArrayEquals(expected, actual);
     }
 
@@ -114,7 +114,7 @@ class AccountDaoTest {
         @Cleanup Session session = sessionFactory.getSession();
         AccountFilter filter = AccountFilter.builder()
                 .userName("Petr")
-                .accountBalance(1000.5)
+                .accountBalance(String.valueOf(1000.5))
                 .build();
         String[] actual = accountDao.findByFilter(session, filter)
                 .stream()
@@ -162,9 +162,9 @@ class AccountDaoTest {
                 .toList();
         assertTrue(allNames.contains(testAccount.getOwnerNameAccount()));
 
-//        List<String> allNames2 = cardDao.findAll(session).stream()
-//                .map(CardEntity::getOwnerName)
-//                .toList();
-//        assertTrue(allNames2.contains(testCard.getOwnerName()));
+        List<String> allNames2 = cardDao.findAll(session).stream()
+                .map(CardEntity::getOwnerName)
+                .toList();
+        assertTrue(allNames2.contains(testCard.getOwnerName()));
     }
 }

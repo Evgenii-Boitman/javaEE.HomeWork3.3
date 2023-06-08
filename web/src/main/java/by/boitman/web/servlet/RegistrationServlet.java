@@ -14,7 +14,7 @@ import by.boitman.web.util.PagesUtil;
 import java.io.IOException;
 import java.util.Optional;
 
-import static by.boitman.database.entity.enam.Gender.*;
+
 import static by.boitman.service.UserService.getInstance;
 
 @WebServlet("/registration")

@@ -21,7 +21,7 @@ import java.util.List;
 
 @Data
 @Builder
-@EqualsAndHashCode(of = "id")
+@EqualsAndHashCode(of = "id", callSuper = false)
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor

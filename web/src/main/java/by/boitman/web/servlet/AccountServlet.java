@@ -24,10 +24,10 @@ public class AccountServlet extends HttpServlet {
         if (id == null) {
             req.setAttribute("account", accountService.getFindByFilter(
                     AccountFilter.builder()
-                            .accountBalance(Double.valueOf(req.getParameter("account_balance")))
+                            .accountBalance(req.getParameter("account_balance"))
                             .userName(req.getParameter("name"))
-                            .limit(Integer.parseInt(req.getParameter("limit")))
-                            .page(Integer.parseInt(req.getParameter("page")))
+                            .limit(req.getParameter("limit"))
+                            .page(req.getParameter("page"))
                             .build()
             ));
             req.getRequestDispatcher(PagesUtil.ACCOUNTS).forward(req, resp);
@@ -40,7 +40,7 @@ public class AccountServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String ownerNameAccount = req.getParameter("name");
         String ownerSurnameAccount = req.getParameter("surname");
-        String gender =req.getParameter("gender");
+        String gender = req.getParameter("gender");
         String numberAccount = req.getParameter("number_account");
         String accountBalance = req.getParameter("account_balance");
         AccountEntity accountForCreation = AccountEntity.builder()

@@ -31,12 +31,10 @@
 
 <c:forEach var="card" items="${requestScope.cards}">
     <h1>Владелец кредитной карточки: ${card.ownerName} ${card.ownerSurname} </h1>
-    <h4>Дата окончания действия кредитной карточки: ${card.dateCard}</h4>
     <h4>Номер кредитной карточки: ${card.cardNumber}</h4>
     <h4>Баланс кредитной карточки: ${card.balance}</h4>
-    <h4><a href=/cards?id=${card.id}>Подробнее</a></h4>
+    <h4><a href=${pageContext.request.contextPath}/cards?id=${card.id}>Подробнее</a></h4>
 </c:forEach>
-
 
 <%@include file="footer.jsp" %>
 </body>

@@ -1,6 +1,7 @@
 package by.boitman.database;
 
 import by.boitman.database.entity.AccountEntity;
+import by.boitman.database.entity.CardEntity;
 import by.boitman.database.entity.UserEntity;
 import by.boitman.database.entity.enam.Gender;
 import by.boitman.database.entity.enam.Role;
@@ -54,14 +55,29 @@ public class TestDataImporter {
                 .numberAccount(2L)
                 .accountBalance(90.5f)
                 .build();
-
+        var cardPetrov = CardEntity.builder()
+                .cardNumber(3L)
+                .ownerName("Ivan")
+                .ownerSurname("Petrov")
+                .balance(199.9f)
+                .build();
+        var cardNikolaev = CardEntity.builder()
+                .cardNumber(4L)
+                .ownerName("Vasya")
+                .ownerSurname("Nikolaev")
+                .balance(299.9f)
+                .build();
 
         accountPetrov.addUser(petrov);
         accountNikolaev.addUser(nikolaev);
+        cardPetrov.addUser(petrov);
+        cardNikolaev.addUser(nikolaev);
 
 
         session.persist(accountNikolaev);
         session.persist(accountPetrov);
+        session.persist(cardPetrov);
+        session.persist(cardNikolaev);
 
     }
 }

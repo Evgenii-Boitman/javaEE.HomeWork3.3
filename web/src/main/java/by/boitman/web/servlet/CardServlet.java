@@ -24,10 +24,10 @@ public class CardServlet extends HttpServlet {
         if (id == null) {
             req.setAttribute("cards", cardService.getFindByFilter(
                     CardFilter.builder()
-                            .balance(Float.valueOf(req.getParameter("card_balance")))
-                            .ownerName(req.getParameter("name"))
-                            .limit(Integer.valueOf(req.getParameter("limit")))
-                            .page(Integer.valueOf(req.getParameter("page")))
+                            .balance(req.getParameter("balance"))
+                            .ownerName(req.getParameter("ownerName"))
+                            .limit(req.getParameter("limit"))
+                            .page(req.getParameter("page"))
                             .build()
 
             ));
