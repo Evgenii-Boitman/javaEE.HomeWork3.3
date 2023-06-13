@@ -1,15 +1,7 @@
 package by.boitman.database.entity;
 
 import by.boitman.database.entity.enam.Gender;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -48,18 +40,25 @@ public class AccountEntity extends CreatableEntity<Long> {
     @Column(name = "account_balance", nullable = false)
     private Float accountBalance;
 
+//    @Builder.Default
+//    @ManyToMany(mappedBy = "accounts")
+//    private List<UserEntity> users = new ArrayList<>();
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private UserEntity users;
+
     @Builder.Default
-    @ManyToMany(mappedBy = "accounts")
-    private List<UserEntity> users = new ArrayList<>();
+    @OneToMany(mappedBy = "accounts")
+    private List<CardEntity> cards = new ArrayList<>();
 
     public void addUser(UserEntity user) {
         this.getUsers().add(user);
-        user.getAccounts().add(this);
+        user.getAccounts().add(this.getUsers());
     }
 
     public void removeUser(UserEntity user) {
         this.getUsers().remove(user);
-        user.getAccounts().remove(this);
+        user.getAccounts().remove(this.getUsers());
     }
-
 }

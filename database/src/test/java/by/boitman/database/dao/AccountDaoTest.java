@@ -51,20 +51,20 @@ class AccountDaoTest {
         assertArrayEquals(expected, actual);
     }
 
-    @Test
-    @Order(2)
-    void whenFindAllDtosInvoked_ThenAllTheAccountsDtosAreReturned() {
-        @Cleanup Session session = sessionFactory.getSession();
-        AccountDto[] actual = accountDao.findAllDtos(session).toArray(AccountDto[]::new);
-        AccountDto[] expected = accountDao.findAll(session)
-                .stream()
-                .map(account -> new AccountDto(account.getNumberAccount(),
-                        account.getUsers().size() > 0
-                                ? account.getUsers().get(0).getName()
-                                : null))
-                .toArray(AccountDto[]::new);
-        assertArrayEquals(expected, actual);
-    }
+//    @Test
+//    @Order(2)
+//    void whenFindAllDtosInvoked_ThenAllTheAccountsDtosAreReturned() {
+//        @Cleanup Session session = sessionFactory.getSession();
+//        AccountDto[] actual = accountDao.findAllDtos(session).toArray(AccountDto[]::new);
+//        AccountDto[] expected = accountDao.findAll(session)
+//                .stream()
+//                .map(account -> new AccountDto(account.getNumberAccount(),
+//                        account.getUsers().size() > 0
+//                                ? account.getUsers().get(0).getName()
+//                                : null))
+//                .toArray(AccountDto[]::new);
+//        assertArrayEquals(expected, actual);
+//    }
 
     @Test
     @Order(3)

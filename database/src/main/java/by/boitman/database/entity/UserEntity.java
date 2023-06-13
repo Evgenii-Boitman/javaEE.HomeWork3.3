@@ -2,17 +2,7 @@ package by.boitman.database.entity;
 
 import by.boitman.database.entity.enam.Gender;
 import by.boitman.database.entity.enam.Role;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -55,30 +45,47 @@ public class UserEntity extends CreatableEntity<Long> {
     @Column(name = "role", length = 10)
     private Role role;
 
-//    @Embedded
+    //    @Embedded
 //    @AttributeOverride(name = "tel", column = @Column(name = "telefon"))
     private String contact;
 
-    @Builder.Default
-    @ManyToMany
-    @JoinTable(name = "account_card_owner",
-            joinColumns = {
-                    @JoinColumn(name = "account_id")
-            },
-            inverseJoinColumns = {
-                    @JoinColumn(name = "user_id")
-            })
-    private List<AccountEntity> accounts = new ArrayList<>();
+    @OneToMany(mappedBy = "users")
+    private List<AccountEntity> accountEntity = new ArrayList<>();
 
+//    @Builder.Default
+//    @ManyToMany
+//    @JoinTable(name = "user_account",
+//            joinColumns = {
+//                    @JoinColumn(name = "account_id")
+//            },
+//            inverseJoinColumns = {
+//                    @JoinColumn(name = "user_id")
+//            })
+//    private List<AccountEntity> accounts = new ArrayList<>();
+//
+//    @Builder.Default
+//    @ManyToMany
+//    @JoinTable(name = "account_card",
+//            joinColumns = {
+//                    @JoinColumn(name = "account_id")
+//            },
+//            inverseJoinColumns = {
+//                    @JoinColumn(name = "card_id")
+//            })
+//    private List<CardEntity> cards = new ArrayList<>();
 
-    @Builder.Default
-    @ManyToMany
-    @JoinTable(name = "account_card_owner",
-            joinColumns = {
-                    @JoinColumn(name = "card_id")
-            },
-            inverseJoinColumns = {
-                    @JoinColumn(name = "user_id")
-            })
-    private List<CardEntity> cards = new ArrayList<>();
+    public void add(UserEntity user) {
+    }
+
+    public void remove(UserEntity user) {
+    }
+
+    public UserEntity getCards() {
+        return null;
+    }
+
+    public UserEntity getAccounts() {
+        return null;
+    }
 }
+
