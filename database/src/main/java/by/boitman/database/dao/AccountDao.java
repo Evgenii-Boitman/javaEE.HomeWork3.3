@@ -29,7 +29,7 @@ public final class AccountDao extends Dao<Long, AccountEntity> {
     public List<AccountDto> findAllDtos(Session session) {
         JpaCriteriaQuery<AccountDto> query = session.getCriteriaBuilder().createQuery(AccountDto.class);
         JpaRoot<AccountEntity> accountRoot = query.from(AccountEntity.class);
-        JpaJoin<Object, Object> users = accountRoot.join(AccountEntity_.USERS, JoinType.LEFT);
+        JpaJoin<Object, Object> users = accountRoot.join(AccountEntity_.CARDS, JoinType.LEFT);
         query.multiselect(accountRoot.get(AccountEntity_.NUMBER_ACCOUNT), users.get(UserEntity_.NAME));
         return session.createQuery(query).list();
     }
@@ -48,7 +48,7 @@ public final class AccountDao extends Dao<Long, AccountEntity> {
         JpaCriteriaQuery<AccountEntity> query = cb.createQuery(AccountEntity.class);
         JpaRoot<AccountEntity> accountRoot = query.from(AccountEntity.class);
         query.select(accountRoot);
-        JpaJoin<Object, Object> users = accountRoot.join(AccountEntity_.USERS);
+        JpaJoin<Object, Object> users = accountRoot.join(AccountEntity_.CARDS);
         query.where(cb.equal(users.get(UserEntity_.NAME), name));
         return session.createQuery(query).list();
     }
@@ -57,7 +57,7 @@ public final class AccountDao extends Dao<Long, AccountEntity> {
         JpaCriteriaQuery<AccountEntity> query = cb.createQuery(AccountEntity.class);
         JpaRoot<AccountEntity> accountRoot = query.from(AccountEntity.class);
         query.select(accountRoot);
-        JpaJoin<Object, Object> users = accountRoot.join(AccountEntity_.USERS);
+        JpaJoin<Object, Object> users = accountRoot.join(AccountEntity_.CARDS);
         query.where(collectPredicates(filter, cb, accountRoot, users).toArray(Predicate[]::new));
 
         return session.createQuery(query)

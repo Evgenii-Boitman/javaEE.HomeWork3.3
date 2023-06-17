@@ -14,8 +14,5 @@ public abstract class CreatableEntity<T extends Serializable> implements BaseEnt
     @Column(name = "created_at", nullable = false)
     private LocalDate created;
 
-    protected void setUser(UserEntity user) {
-
-    }
 
 }

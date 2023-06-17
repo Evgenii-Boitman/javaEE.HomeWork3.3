@@ -45,46 +45,29 @@ public class UserEntity extends CreatableEntity<Long> {
     @Column(name = "role", length = 10)
     private Role role;
 
-    //    @Embedded
-//    @AttributeOverride(name = "tel", column = @Column(name = "telefon"))
+    @Column(name = "contact", length = 30, nullable = false)
     private String contact;
 
+    @Builder.Default
     @OneToMany(mappedBy = "users")
-    private List<AccountEntity> accountEntity = new ArrayList<>();
-
-//    @Builder.Default
-//    @ManyToMany
-//    @JoinTable(name = "user_account",
-//            joinColumns = {
-//                    @JoinColumn(name = "account_id")
-//            },
-//            inverseJoinColumns = {
-//                    @JoinColumn(name = "user_id")
-//            })
-//    private List<AccountEntity> accounts = new ArrayList<>();
-//
-//    @Builder.Default
-//    @ManyToMany
-//    @JoinTable(name = "account_card",
-//            joinColumns = {
-//                    @JoinColumn(name = "account_id")
-//            },
-//            inverseJoinColumns = {
-//                    @JoinColumn(name = "card_id")
-//            })
-//    private List<CardEntity> cards = new ArrayList<>();
+    private List<AccountEntity> accounts = new ArrayList<>();
 
     public void add(UserEntity user) {
+
     }
+
 
     public void remove(UserEntity user) {
     }
 
-    public UserEntity getCards() {
-        return null;
+
+    public void add(CardEntity cardEntity) {
     }
 
-    public UserEntity getAccounts() {
+    public void remove(CardEntity cardEntity) {
+    }
+
+    public UserEntity getCards() {
         return null;
     }
 }

@@ -10,6 +10,8 @@ import lombok.NoArgsConstructor;
 import java.util.ArrayList;
 import java.util.List;
 
+import static by.boitman.database.entity.AccountEntity_.users;
+
 
 @Data
 @Builder
@@ -37,26 +39,23 @@ public class CardEntity extends CreatableEntity<Long> {
     @Column(name = "card_balance", nullable = false)
     private Float balance;
 
-
     @ManyToOne
     @JoinColumn(name = "account_id")
-    private AccountEntity accountEntity;
-
-    @Builder.Default
-    @ManyToMany(mappedBy = "cards")
-    private List<UserEntity> users = new ArrayList<>();
+    private AccountEntity accounts;
 
     public void addUser(UserEntity user) {
         this.getUsers().add(user);
-        user.getCards().add(this.getUsers());
+        user.getCards().add(this);
     }
 
     private UserEntity getUsers() {
-        return null;
+        return (UserEntity) users;
     }
+
 
     public void removeUser(UserEntity user) {
         this.getUsers().remove(user);
-        user.getCards().remove(this.getUsers());
+        user.getCards().remove(this);
     }
+
 }

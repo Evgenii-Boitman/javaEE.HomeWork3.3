@@ -40,10 +40,6 @@ public class AccountEntity extends CreatableEntity<Long> {
     @Column(name = "account_balance", nullable = false)
     private Float accountBalance;
 
-//    @Builder.Default
-//    @ManyToMany(mappedBy = "accounts")
-//    private List<UserEntity> users = new ArrayList<>();
-
     @ManyToOne
     @JoinColumn(name = "user_id")
     private UserEntity users;
@@ -52,13 +48,17 @@ public class AccountEntity extends CreatableEntity<Long> {
     @OneToMany(mappedBy = "accounts")
     private List<CardEntity> cards = new ArrayList<>();
 
+//    @JsonIgnore
+//    public UserEntity getUsers() {
+//        return users;
+//    }
     public void addUser(UserEntity user) {
         this.getUsers().add(user);
-        user.getAccounts().add(this.getUsers());
+        user.getAccounts().add(this);
     }
 
     public void removeUser(UserEntity user) {
         this.getUsers().remove(user);
-        user.getAccounts().remove(this.getUsers());
+        user.getAccounts().remove(this);
     }
 }
