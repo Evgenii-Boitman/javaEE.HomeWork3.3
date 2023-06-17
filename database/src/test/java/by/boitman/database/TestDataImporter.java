@@ -47,7 +47,6 @@ public class TestDataImporter {
                 .numberAccount(1L)
                 .accountBalance(1000.5f)
                 .build();
-
         var accountNikolaev = AccountEntity.builder()
                 .ownerNameAccount("Nikolai")
                 .ownerSurnameAccount("Nikolaev")
@@ -55,6 +54,7 @@ public class TestDataImporter {
                 .numberAccount(2L)
                 .accountBalance(90.5f)
                 .build();
+
         var cardPetrov = CardEntity.builder()
                 .cardNumber(3L)
                 .ownerName("Ivan")

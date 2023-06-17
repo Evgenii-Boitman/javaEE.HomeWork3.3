@@ -52,23 +52,25 @@ public class UserEntity extends CreatableEntity<Long> {
     @OneToMany(mappedBy = "users")
     private List<AccountEntity> accounts = new ArrayList<>();
 
+
+    public UserEntity getCards() {
+        return null;
+    }
+
     public void add(UserEntity user) {
 
     }
 
-
     public void remove(UserEntity user) {
+
     }
 
-
     public void add(CardEntity cardEntity) {
+
     }
 
     public void remove(CardEntity cardEntity) {
-    }
 
-    public UserEntity getCards() {
-        return null;
     }
 }
 

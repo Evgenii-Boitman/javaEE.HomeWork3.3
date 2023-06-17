@@ -52,7 +52,6 @@ public class CardEntity extends CreatableEntity<Long> {
         return (UserEntity) users;
     }
 
-
     public void removeUser(UserEntity user) {
         this.getUsers().remove(user);
         user.getCards().remove(this);

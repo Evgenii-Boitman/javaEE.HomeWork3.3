@@ -21,24 +21,24 @@ CREATE TABLE users
 CREATE TABLE account
 (
     id              BIGSERIAL PRIMARY KEY,
-    user_id         BIGINT REFERENCES users (id),
-    name            VARCHAR(50) NOT NULL,
-    surname         VARCHAR(50) NOT NULL,
-    gender          VARCHAR(10) NOT NULL,
-    number_account  BIGSERIAL   NOT NULL,
+    user_id         BIGINT REFERENCES users (id) NOT NULL,
+    name            VARCHAR(50)                  NOT NULL,
+    surname         VARCHAR(50)                  NOT NULL,
+    gender          VARCHAR(10)                  NOT NULL,
+    number_account  BIGSERIAL                    NOT NULL,
     account_balance FLOAT,
-    created_at      DATE        NOT NULL DEFAULT CURRENT_TIMESTAMP
+    created_at      DATE                         NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE card
 (
     id           BIGSERIAL PRIMARY KEY,
-    account_id   BIGINT REFERENCES account (id),
-    name         VARCHAR(50) NOT NULL,
-    surname      VARCHAR(50) NOT NULL,
-    card_number  BIGSERIAL   NOT NULL,
+    account_id   BIGINT REFERENCES account (id) NOT NULL,
+    name         VARCHAR(50)                    NOT NULL,
+    surname      VARCHAR(50)                    NOT NULL,
+    card_number  BIGSERIAL                      NOT NULL,
     card_balance FLOAT,
-    created_at   DATE        NOT NULL DEFAULT CURRENT_TIMESTAMP
+    created_at   DATE                           NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE contact

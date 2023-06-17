@@ -11,6 +11,8 @@ import lombok.NoArgsConstructor;
 import java.util.ArrayList;
 import java.util.List;
 
+import static by.boitman.database.entity.AccountEntity_.users;
+
 @Data
 @Builder
 @EqualsAndHashCode(of = "id", callSuper = false)
@@ -48,10 +50,6 @@ public class AccountEntity extends CreatableEntity<Long> {
     @OneToMany(mappedBy = "accounts")
     private List<CardEntity> cards = new ArrayList<>();
 
-//    @JsonIgnore
-//    public UserEntity getUsers() {
-//        return users;
-//    }
     public void addUser(UserEntity user) {
         this.getUsers().add(user);
         user.getAccounts().add(this);
@@ -61,4 +59,5 @@ public class AccountEntity extends CreatableEntity<Long> {
         this.getUsers().remove(user);
         user.getAccounts().remove(this);
     }
+
 }
