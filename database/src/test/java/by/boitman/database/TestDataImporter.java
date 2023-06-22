@@ -3,8 +3,6 @@ package by.boitman.database;
 import by.boitman.database.entity.AccountEntity;
 import by.boitman.database.entity.CardEntity;
 import by.boitman.database.entity.UserEntity;
-import by.boitman.database.entity.enam.Gender;
-import by.boitman.database.entity.enam.Role;
 import lombok.experimental.UtilityClass;
 import org.hibernate.Session;
 
@@ -68,11 +66,10 @@ public class TestDataImporter {
                 .balance(299.9f)
                 .build();
 
-        accountPetrov.addUser(petrov);
-        accountNikolaev.addUser(nikolaev);
-        cardPetrov.addUser(petrov);
-        cardNikolaev.addUser(nikolaev);
-
+        accountPetrov.setUsers(petrov);
+        accountNikolaev.setUsers(nikolaev);
+        cardPetrov.setAccounts(accountPetrov);
+        cardNikolaev.setAccounts(accountNikolaev);
 
         session.persist(accountNikolaev);
         session.persist(accountPetrov);

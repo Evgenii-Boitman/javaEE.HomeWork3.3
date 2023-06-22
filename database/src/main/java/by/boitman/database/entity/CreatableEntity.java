@@ -5,7 +5,6 @@ import jakarta.persistence.MappedSuperclass;
 import org.hibernate.annotations.CreationTimestamp;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.List;
 
 @MappedSuperclass
 public abstract class CreatableEntity<T extends Serializable> implements BaseEntity<T> {
@@ -13,6 +12,4 @@ public abstract class CreatableEntity<T extends Serializable> implements BaseEnt
     @CreationTimestamp
     @Column(name = "created_at", nullable = false)
     private LocalDate created;
-
-
 }

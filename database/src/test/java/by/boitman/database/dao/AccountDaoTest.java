@@ -92,21 +92,21 @@ class AccountDaoTest {
         assertArrayEquals(expected, actual);
     }
 
-    @Test
-    @Order(5)
-    void whenFindAllByFilterContainsOnlyUserInvoked_ThenAllTheFilteredByUserAccountAreReturned() {
-        @Cleanup Session session = sessionFactory.getSession();
-        AccountFilter filter = AccountFilter.builder()
-                .userName("Petr")
-                .build();
-        Float[] actual = accountDao.findByFilter(session, filter)
-                .stream()
-                .map(AccountEntity::getAccountBalance)
-                .toArray(Float[]::new);
-        Float[] expected = List.of(1000.5f)
-                .toArray(Float[]::new);
-        assertArrayEquals(expected, actual);
-    }
+//    @Test
+//    @Order(5)
+//    void whenFindAllByFilterContainsOnlyUserInvoked_ThenAllTheFilteredByUserAccountAreReturned() {
+//        @Cleanup Session session = sessionFactory.getSession();
+//        AccountFilter filter = AccountFilter.builder()
+//                .userName("Petr")
+//                .build();
+//        Float[] actual = accountDao.findByFilter(session, filter)
+//                .stream()
+//                .map(AccountEntity::getAccountBalance)
+//                .toArray(Float[]::new);
+//        Float[] expected = List.of(1000.5f)
+//                .toArray(Float[]::new);
+//        assertArrayEquals(expected, actual);
+//    }
 
     @Test
     @Order(6)

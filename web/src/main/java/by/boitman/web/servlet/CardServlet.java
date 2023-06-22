@@ -29,7 +29,6 @@ public class CardServlet extends HttpServlet {
                             .limit(req.getParameter("limit"))
                             .page(req.getParameter("page"))
                             .build()
-
             ));
             req.getRequestDispatcher(PagesUtil.CARDS).forward(req, resp);
         } else {

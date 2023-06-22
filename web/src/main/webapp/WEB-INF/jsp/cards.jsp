@@ -23,17 +23,17 @@
     <label for="limitId">Введите количество позиций на странице:</label><br>
     <input type="text" id="limitId" name="limit"><br>
 
-    <label for="balancesId">Введите максимальный баланс:</label><br>
-    <input type="text" id="balancesId" name="balances"><br>
+    <label for="balanceId">Введите максимальный баланс:</label><br>
+    <input type="text" id="balanceId" name="balance"><br>
 
     <input type="submit" value="Submit">
 </form>
 
-<c:forEach var="card" items="${requestScope.cards}">
-    <h1>Владелец кредитной карточки: ${card.ownerName} ${card.ownerSurname} </h1>
-    <h4>Номер кредитной карточки: ${card.cardNumber}</h4>
-    <h4>Баланс кредитной карточки: ${card.balance}</h4>
-    <h4><a href=${pageContext.request.contextPath}/cards?id=${card.id}>Подробнее</a></h4>
+<c:forEach var="cards" items="${requestScope.cards}">
+    <h1>Владелец кредитной карточки: ${cards.ownerName} ${cards.ownerSurname} </h1>
+    <h4>Номер кредитной карточки: ${cards.cardNumber}</h4>
+    <h4>Баланс кредитной карточки: ${cards.balance}</h4>
+    <h4><a href=${pageContext.request.contextPath}/cards?id=${cards.id}>Подробнее</a></h4>
 </c:forEach>
 
 <%@include file="footer.jsp" %>

@@ -1,16 +1,21 @@
 package by.boitman.database.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Cascade;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static by.boitman.database.entity.AccountEntity_.users;
+import static org.hibernate.annotations.CascadeType.SAVE_UPDATE;
 
 
 @Data
@@ -21,7 +26,6 @@ import static by.boitman.database.entity.AccountEntity_.users;
 @AllArgsConstructor
 @Table(name = "card")
 public class CardEntity extends CreatableEntity<Long> {
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,21 +44,8 @@ public class CardEntity extends CreatableEntity<Long> {
     private Float balance;
 
     @ManyToOne
+    @Cascade(SAVE_UPDATE)
     @JoinColumn(name = "account_id")
     private AccountEntity accounts;
-
-    public void addUser(UserEntity user) {
-        this.getUsers().add(user);
-        user.getCards().add(this);
-    }
-
-    private UserEntity getUsers() {
-        return (UserEntity) users;
-    }
-
-    public void removeUser(UserEntity user) {
-        this.getUsers().remove(user);
-        user.getCards().remove(this);
-    }
 
 }

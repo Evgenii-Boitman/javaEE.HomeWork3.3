@@ -2,7 +2,16 @@ package by.boitman.database.entity;
 
 import by.boitman.database.entity.enam.Gender;
 import by.boitman.database.entity.enam.Role;
-import jakarta.persistence.*;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -49,28 +58,8 @@ public class UserEntity extends CreatableEntity<Long> {
     private String contact;
 
     @Builder.Default
-    @OneToMany(mappedBy = "users")
+    @OneToMany(mappedBy = "users", orphanRemoval = true, cascade = CascadeType.ALL)
     private List<AccountEntity> accounts = new ArrayList<>();
 
-
-    public UserEntity getCards() {
-        return null;
-    }
-
-    public void add(UserEntity user) {
-
-    }
-
-    public void remove(UserEntity user) {
-
-    }
-
-    public void add(CardEntity cardEntity) {
-
-    }
-
-    public void remove(CardEntity cardEntity) {
-
-    }
 }
 

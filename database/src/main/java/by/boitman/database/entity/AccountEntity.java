@@ -1,17 +1,28 @@
 package by.boitman.database.entity;
 
 import by.boitman.database.entity.enam.Gender;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Cascade;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static by.boitman.database.entity.AccountEntity_.users;
+import static org.hibernate.annotations.CascadeType.SAVE_UPDATE;
 
 @Data
 @Builder
@@ -43,21 +54,12 @@ public class AccountEntity extends CreatableEntity<Long> {
     private Float accountBalance;
 
     @ManyToOne
+    @Cascade(SAVE_UPDATE)
     @JoinColumn(name = "user_id")
     private UserEntity users;
 
     @Builder.Default
     @OneToMany(mappedBy = "accounts")
     private List<CardEntity> cards = new ArrayList<>();
-
-    public void addUser(UserEntity user) {
-        this.getUsers().add(user);
-        user.getAccounts().add(this);
-    }
-
-    public void removeUser(UserEntity user) {
-        this.getUsers().remove(user);
-        user.getAccounts().remove(this);
-    }
 
 }
