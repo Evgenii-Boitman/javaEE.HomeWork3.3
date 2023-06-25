@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UserEntity_.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">database</a> &gt; <a href="index.source.html" class="el_package">by.boitman.database.entity</a> &gt; <span class="el_source">UserEntity_.java</span></div><h1>UserEntity_.java</h1><pre class="source lang-java linenums">package by.boitman.database.entity;
+
+import by.boitman.database.entity.enam.Gender;
+import by.boitman.database.entity.enam.Role;
+import jakarta.persistence.metamodel.ListAttribute;
+import jakarta.persistence.metamodel.SingularAttribute;
+import jakarta.persistence.metamodel.StaticMetamodel;
+import javax.annotation.processing.Generated;
+
+@Generated(value = &quot;org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor&quot;)
+@StaticMetamodel(UserEntity.class)
+<span class="nc" id="L12">public abstract class UserEntity_ extends by.boitman.database.entity.CreatableEntity_ {</span>
+
+	public static volatile SingularAttribute&lt;UserEntity, String&gt; password;
+	public static volatile SingularAttribute&lt;UserEntity, Role&gt; role;
+	public static volatile SingularAttribute&lt;UserEntity, Gender&gt; gender;
+	public static volatile SingularAttribute&lt;UserEntity, String&gt; surname;
+	public static volatile SingularAttribute&lt;UserEntity, String&gt; contact;
+	public static volatile SingularAttribute&lt;UserEntity, String&gt; name;
+	public static volatile SingularAttribute&lt;UserEntity, Long&gt; id;
+	public static volatile ListAttribute&lt;UserEntity, AccountEntity&gt; accounts;
+	public static volatile SingularAttribute&lt;UserEntity, String&gt; email;
+
+	public static final String PASSWORD = &quot;password&quot;;
+	public static final String ROLE = &quot;role&quot;;
+	public static final String GENDER = &quot;gender&quot;;
+	public static final String SURNAME = &quot;surname&quot;;
+	public static final String CONTACT = &quot;contact&quot;;
+	public static final String NAME = &quot;name&quot;;
+	public static final String ID = &quot;id&quot;;
+	public static final String ACCOUNTS = &quot;accounts&quot;;
+	public static final String EMAIL = &quot;email&quot;;
+
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.9.202303310957</span></div></body></html>

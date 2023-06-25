@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="6.18">
+<file name="E:\Java\Java Enterprise\javaEE.HomeWork3.3\web\src\main\java\by\boitman\web\filter\LoginFilter.java">
+<error line="14" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocTypeCheck"/>
+</file>
+<file name="E:\Java\Java Enterprise\javaEE.HomeWork3.3\web\src\main\java\by\boitman\web\servlet\AccountServlet.java">
+<error line="17" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocTypeCheck"/>
+</file>
+<file name="E:\Java\Java Enterprise\javaEE.HomeWork3.3\web\src\main\java\by\boitman\web\servlet\BankServlet.java">
+<error line="11" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocTypeCheck"/>
+</file>
+<file name="E:\Java\Java Enterprise\javaEE.HomeWork3.3\web\src\main\java\by\boitman\web\servlet\CardServlet.java">
+<error line="16" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocTypeCheck"/>
+</file>
+<file name="E:\Java\Java Enterprise\javaEE.HomeWork3.3\web\src\main\java\by\boitman\web\servlet\ContactsServlet.java">
+<error line="11" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocTypeCheck"/>
+</file>
+<file name="E:\Java\Java Enterprise\javaEE.HomeWork3.3\web\src\main\java\by\boitman\web\servlet\LoginServlet.java">
+<error line="14" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocTypeCheck"/>
+</file>
+<file name="E:\Java\Java Enterprise\javaEE.HomeWork3.3\web\src\main\java\by\boitman\web\servlet\LogoutServlet.java">
+<error line="0" severity="info" message="File does not end with a newline." source="com.puppycrawl.tools.checkstyle.checks.NewlineAtEndOfFileCheck"/>
+<error line="11" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocTypeCheck"/>
+</file>
+<file name="E:\Java\Java Enterprise\javaEE.HomeWork3.3\web\src\main\java\by\boitman\web\servlet\MainServlet.java">
+<error line="11" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocTypeCheck"/>
+</file>
+<file name="E:\Java\Java Enterprise\javaEE.HomeWork3.3\web\src\main\java\by\boitman\web\servlet\RegistrationServlet.java">
+<error line="20" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocTypeCheck"/>
+</file>
+<file name="E:\Java\Java Enterprise\javaEE.HomeWork3.3\web\src\main\java\by\boitman\web\util\PagesUtil.java">
+<error line="3" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocTypeCheck"/>
+</file>
+</checkstyle>

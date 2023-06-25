@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AccountDao.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">database</a> &gt; <a href="index.source.html" class="el_package">by.boitman.database.dao</a> &gt; <span class="el_source">AccountDao.java</span></div><h1>AccountDao.java</h1><pre class="source lang-java linenums">package by.boitman.database.dao;
+
+
+import by.boitman.database.dto.AccountDto;
+import by.boitman.database.entity.AccountEntity;
+import by.boitman.database.dto.AccountFilter;
+import by.boitman.database.entity.AccountEntity_;
+import by.boitman.database.entity.UserEntity_;
+import by.boitman.database.entity.enam.Gender;
+import jakarta.persistence.criteria.JoinType;
+import jakarta.persistence.criteria.Predicate;
+import org.hibernate.Session;
+import org.hibernate.query.criteria.HibernateCriteriaBuilder;
+import org.hibernate.query.criteria.JpaCriteriaQuery;
+import org.hibernate.query.criteria.JpaJoin;
+import org.hibernate.query.criteria.JpaRoot;
+import java.util.ArrayList;
+import java.util.List;
+
+
+
+public final class AccountDao extends Dao&lt;Long, AccountEntity&gt; {
+<span class="fc" id="L23">    private static final AccountDao INSTANCE = new AccountDao();</span>
+    private AccountDao() {
+<span class="fc" id="L25">        super(AccountEntity.class);</span>
+<span class="fc" id="L26">    }</span>
+
+
+    public List&lt;AccountDto&gt; findAllDtos(Session session) {
+<span class="nc" id="L30">        JpaCriteriaQuery&lt;AccountDto&gt; query = session.getCriteriaBuilder().createQuery(AccountDto.class);</span>
+<span class="nc" id="L31">        JpaRoot&lt;AccountEntity&gt; accountRoot = query.from(AccountEntity.class);</span>
+<span class="nc" id="L32">        JpaJoin&lt;Object, Object&gt; users = accountRoot.join(AccountEntity_.USERS, JoinType.LEFT);</span>
+<span class="nc" id="L33">        query.multiselect(accountRoot.get(AccountEntity_.NUMBER_ACCOUNT), users.get(UserEntity_.NAME));</span>
+<span class="nc" id="L34">        return session.createQuery(query).list();</span>
+    }
+
+    public List&lt;AccountEntity&gt; findAllByGender(Session session, Gender gender) {
+<span class="fc" id="L38">        HibernateCriteriaBuilder cb = session.getCriteriaBuilder();</span>
+<span class="fc" id="L39">        JpaCriteriaQuery&lt;AccountEntity&gt; query = cb.createQuery(AccountEntity.class);</span>
+<span class="fc" id="L40">        JpaRoot&lt;AccountEntity&gt; accountRoot = query.from(AccountEntity.class);</span>
+<span class="fc" id="L41">        query.select(accountRoot);</span>
+<span class="fc" id="L42">        query.where(cb.equal(accountRoot.get(AccountEntity_.GENDER), gender));</span>
+<span class="fc" id="L43">        return session.createQuery(query).list();</span>
+    }
+
+    public List&lt;AccountEntity&gt; findAllByUser(Session session, String name) {
+<span class="fc" id="L47">        HibernateCriteriaBuilder cb = session.getCriteriaBuilder();</span>
+<span class="fc" id="L48">        JpaCriteriaQuery&lt;AccountEntity&gt; query = cb.createQuery(AccountEntity.class);</span>
+<span class="fc" id="L49">        JpaRoot&lt;AccountEntity&gt; accountRoot = query.from(AccountEntity.class);</span>
+<span class="fc" id="L50">        query.select(accountRoot);</span>
+<span class="fc" id="L51">        JpaJoin&lt;Object, Object&gt; users = accountRoot.join(AccountEntity_.USERS);</span>
+<span class="fc" id="L52">        query.where(cb.equal(users.get(UserEntity_.NAME), name));</span>
+<span class="fc" id="L53">        return session.createQuery(query).list();</span>
+    }
+    public List&lt;AccountEntity&gt; findByFilter(Session session, AccountFilter filter) {
+<span class="fc" id="L56">        HibernateCriteriaBuilder cb = session.getCriteriaBuilder();</span>
+<span class="fc" id="L57">        JpaCriteriaQuery&lt;AccountEntity&gt; query = cb.createQuery(AccountEntity.class);</span>
+<span class="fc" id="L58">        JpaRoot&lt;AccountEntity&gt; accountRoot = query.from(AccountEntity.class);</span>
+<span class="fc" id="L59">        query.select(accountRoot);</span>
+<span class="fc" id="L60">        JpaJoin&lt;Object, Object&gt; users = accountRoot.join(AccountEntity_.USERS);</span>
+<span class="fc" id="L61">        query.where(collectPredicates(filter, cb, accountRoot, users).toArray(Predicate[]::new));</span>
+
+<span class="fc" id="L63">        return session.createQuery(query)</span>
+<span class="fc" id="L64">                .setMaxResults(filter.getLimit())</span>
+<span class="fc" id="L65">                .setFirstResult(filter.getOffset())</span>
+<span class="fc" id="L66">                .list();</span>
+    }
+
+    private static List&lt;Predicate&gt; collectPredicates(AccountFilter filter, HibernateCriteriaBuilder cb, JpaRoot&lt;AccountEntity&gt; accountRoot, JpaJoin&lt;Object, Object&gt; users) {
+<span class="fc" id="L70">        List&lt;Predicate&gt; predicates = new ArrayList&lt;&gt;();</span>
+<span class="pc bpc" id="L71" title="1 of 2 branches missed.">        if (filter.getAccountBalance() != null) {</span>
+<span class="fc" id="L72">            predicates.add(cb.le(accountRoot.get(AccountEntity_.ACCOUNT_BALANCE), filter.getAccountBalance()));</span>
+        }
+<span class="pc bpc" id="L74" title="1 of 2 branches missed.">        if (filter.getUserName() != null) {</span>
+<span class="fc" id="L75">            predicates.add(cb.equal(accountRoot.get(AccountEntity_.OWNER_NAME_ACCOUNT), filter.getUserName()));</span>
+        }
+<span class="fc" id="L77">        return predicates;</span>
+    }
+
+    public static AccountDao getInstance() {
+<span class="fc" id="L81">        return INSTANCE;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.9.202303310957</span></div></body></html>

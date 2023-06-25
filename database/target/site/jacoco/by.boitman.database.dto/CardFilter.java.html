@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CardFilter.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">database</a> &gt; <a href="index.source.html" class="el_package">by.boitman.database.dto</a> &gt; <span class="el_source">CardFilter.java</span></div><h1>CardFilter.java</h1><pre class="source lang-java linenums">package by.boitman.database.dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+
+<span class="nc bnc" id="L7" title="All 38 branches missed.">@Data</span>
+<span class="nc" id="L8">@Builder</span>
+<span class="nc" id="L9">@AllArgsConstructor</span>
+public class CardFilter {
+    private String balance;
+<span class="nc" id="L12">    private String ownerName;</span>
+    private String limit;
+<span class="nc" id="L14">    private String page;</span>
+    public Float getBalance() {
+<span class="nc bnc" id="L16" title="All 2 branches missed.">        return balance == null ? 0.0f : Float.parseFloat(balance);</span>
+    }
+
+    public Integer getLimit() {
+<span class="nc bnc" id="L20" title="All 2 branches missed.">        return limit == null ? 10 : Integer.parseInt(limit);</span>
+    }
+
+    public Integer getOffset() {
+<span class="nc bnc" id="L24" title="All 2 branches missed.">        return page == null ? 0 : this.getLimit() * (Integer.parseInt(page) - 1);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.9.202303310957</span></div></body></html>

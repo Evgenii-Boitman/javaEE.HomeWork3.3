@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AccountEntity_.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">database</a> &gt; <a href="index.source.html" class="el_package">by.boitman.database.entity</a> &gt; <span class="el_source">AccountEntity_.java</span></div><h1>AccountEntity_.java</h1><pre class="source lang-java linenums">package by.boitman.database.entity;
+
+import by.boitman.database.entity.enam.Gender;
+import jakarta.persistence.metamodel.ListAttribute;
+import jakarta.persistence.metamodel.SingularAttribute;
+import jakarta.persistence.metamodel.StaticMetamodel;
+import javax.annotation.processing.Generated;
+
+@Generated(value = &quot;org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor&quot;)
+@StaticMetamodel(AccountEntity.class)
+<span class="nc" id="L11">public abstract class AccountEntity_ extends by.boitman.database.entity.CreatableEntity_ {</span>
+
+	public static volatile SingularAttribute&lt;AccountEntity, String&gt; ownerNameAccount;
+	public static volatile SingularAttribute&lt;AccountEntity, String&gt; ownerSurnameAccount;
+	public static volatile ListAttribute&lt;AccountEntity, CardEntity&gt; cards;
+	public static volatile SingularAttribute&lt;AccountEntity, Gender&gt; gender;
+	public static volatile SingularAttribute&lt;AccountEntity, Long&gt; numberAccount;
+	public static volatile SingularAttribute&lt;AccountEntity, Long&gt; id;
+	public static volatile SingularAttribute&lt;AccountEntity, Float&gt; accountBalance;
+	public static volatile SingularAttribute&lt;AccountEntity, UserEntity&gt; users;
+
+	public static final String OWNER_NAME_ACCOUNT = &quot;ownerNameAccount&quot;;
+	public static final String OWNER_SURNAME_ACCOUNT = &quot;ownerSurnameAccount&quot;;
+	public static final String CARDS = &quot;cards&quot;;
+	public static final String GENDER = &quot;gender&quot;;
+	public static final String NUMBER_ACCOUNT = &quot;numberAccount&quot;;
+	public static final String ID = &quot;id&quot;;
+	public static final String ACCOUNT_BALANCE = &quot;accountBalance&quot;;
+	public static final String USERS = &quot;users&quot;;
+
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.9.202303310957</span></div></body></html>
