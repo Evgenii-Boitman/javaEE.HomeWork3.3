@@ -11,25 +11,28 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import by.boitman.web.util.PagesUtil;
 import lombok.SneakyThrows;
-
+import org.springframework.context.ApplicationContext;
 import java.io.IOException;
 
 @WebServlet("/accounts")
 public class AccountServlet extends HttpServlet {
-    private final AccountService accountService = AccountService.getInstance();
+
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        ApplicationContext context = (ApplicationContext) getServletContext().getAttribute("applicationContext");
+        AccountService accountService = context.getBean(AccountService.class);
         String id = req.getParameter("id");
         if (id == null) {
             req.setAttribute("account", accountService.getFindByFilter(
-                    AccountFilter.builder()
-                            .accountBalance(req.getParameter("account_balance"))
-                            .userName(req.getParameter("name"))
-                            .limit(req.getParameter("limit"))
-                            .page(req.getParameter("page"))
-                            .build()
-            ));
+                            AccountFilter.builder()
+                                    .accountBalance(req.getParameter("account_balance"))
+                                    .userName(req.getParameter("name"))
+                                    .limit(req.getParameter("limit"))
+                                    .page(req.getParameter("page"))
+                                    .build()
+                    )
+            );
             req.getRequestDispatcher(PagesUtil.ACCOUNTS).forward(req, resp);
         } else {
             redirectToAccountPage(req, resp, accountService.getById(Long.parseLong(id)));
@@ -38,6 +41,8 @@ public class AccountServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        ApplicationContext context = (ApplicationContext) getServletContext().getAttribute("applicationContext");
+        AccountService accountService = context.getBean(AccountService.class);
         String ownerNameAccount = req.getParameter("name");
         String ownerSurnameAccount = req.getParameter("surname");
         String gender = req.getParameter("gender");
@@ -50,11 +55,7 @@ public class AccountServlet extends HttpServlet {
                 .numberAccount(Long.valueOf(numberAccount))
                 .accountBalance(Float.valueOf(accountBalance))
                 .build();
-        accountService.create(accountForCreation)
-                .ifPresentOrElse(
-                        account -> redirectToAccountPage(req, resp, account),
-                        () -> onFailedCreation(req, resp)
-                );
+        redirectToAccountPage(req, resp, accountService.create(accountForCreation));
         super.doPost(req, resp);
     }
 

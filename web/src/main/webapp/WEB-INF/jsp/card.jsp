@@ -12,21 +12,12 @@ s<%--
 <body>
 <%@include file="header.jsp" %>
 
-<%--<c:if test="${ param.error  == true}">--%>
-<%--    Пользователь не был создан--%>
-<%--</c:if>--%>
-
-<%--<c:if test="${ param.error  == false}">--%>
 <h1>${sessionScope.user.name}, рады Вас приветствовать!</h1>
 <h1>
-    <h1>Владелец кредитной карточки: ${card.ownerName} ${card.ownerSurname} </h1>
-    <h4>Дата окончания действия кредитной карточки: ${card.dateCard}</h4>
+    <h4>Владелец кредитной карточки: ${card.ownerName} ${card.ownerSurname} </h4>
     <h4>Номер кредитной карточки: ${card.cardNumber}</h4>
     <h4>Баланс кредитной карточки: ${card.balance}</h4>
 </h1>
-
-
-<%--</c:if>--%>
 
 <%@include file="footer.jsp" %>
 </body>

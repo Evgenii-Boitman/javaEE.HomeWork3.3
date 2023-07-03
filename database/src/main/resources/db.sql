@@ -15,7 +15,7 @@ CREATE TABLE users
     gender     VARCHAR(10)        NOT NULL,
     role       VARCHAR(10)        NOT NULL,
     contact    VARCHAR(30)        NULL,
-    created_at DATE               NOT NULL DEFAULT CURRENT_TIMESTAMP
+    created_at DATE               DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE account
@@ -27,7 +27,7 @@ CREATE TABLE account
     gender          VARCHAR(10)                  NOT NULL,
     number_account  BIGSERIAL                    NOT NULL,
     account_balance FLOAT,
-    created_at      DATE                         NOT NULL DEFAULT CURRENT_TIMESTAMP
+    created_at      DATE                         DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE card
@@ -38,7 +38,7 @@ CREATE TABLE card
     surname      VARCHAR(50)                    NOT NULL,
     card_number  BIGSERIAL                      NOT NULL,
     card_balance FLOAT,
-    created_at   DATE                           NOT NULL DEFAULT CURRENT_TIMESTAMP
+    created_at   DATE                           DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE contact

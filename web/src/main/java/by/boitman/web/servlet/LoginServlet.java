@@ -9,11 +9,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.SneakyThrows;
 import by.boitman.web.util.PagesUtil;
-
+import org.springframework.context.ApplicationContext;
 import java.io.IOException;
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
-    private final UserService userService = UserService.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -22,6 +21,8 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        ApplicationContext context = (ApplicationContext) getServletContext().getAttribute("applicationContext");
+        UserService userService = context.getBean(UserService.class);
         String email = req.getParameter("email");
         String password = req.getParameter("password");
         userService.getBy(email, password)

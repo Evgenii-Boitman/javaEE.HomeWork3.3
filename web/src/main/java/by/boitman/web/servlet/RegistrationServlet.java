@@ -10,17 +10,11 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import by.boitman.web.util.PagesUtil;
-
+import org.springframework.context.ApplicationContext;
 import java.io.IOException;
-import java.util.Optional;
-
-
-import static by.boitman.service.UserService.getInstance;
 
 @WebServlet("/registration")
 public class RegistrationServlet extends HttpServlet {
-
-    private final UserService userService = getInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -29,7 +23,9 @@ public class RegistrationServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        Optional<UserEntity> saved = userService.save(
+        ApplicationContext context = (ApplicationContext) getServletContext().getAttribute("applicationContext");
+        UserService userService = context.getBean(UserService.class);
+        UserEntity saved = userService.save(
                 UserEntity.builder()
                         .name(req.getParameter("name"))
                         .surname(req.getParameter("surname"))
