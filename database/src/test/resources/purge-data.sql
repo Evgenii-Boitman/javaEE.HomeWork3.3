@@ -1,6 +1,6 @@
-DELETE
-FROM user_account
-WHERE TRUE;
+-- DELETE
+-- FROM user_account
+-- WHERE TRUE;
 
 DELETE
 FROM users

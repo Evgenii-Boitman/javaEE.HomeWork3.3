@@ -52,4 +52,13 @@ public class AccountEntity extends CreatableEntity<Long> {
     @OneToMany(mappedBy = "accounts", orphanRemoval = true, cascade = CascadeType.ALL)
     private List<CardEntity> cards = new ArrayList<>();
 
+//    public void addCard(CardEntity cardEntity) {
+//        cards.add(cardEntity);
+//        cardEntity.setAccounts(this);
+//    }
+//    public void removeCard(CardEntity cardEntity) {
+//        cards.remove(cardEntity);
+//        cardEntity.setAccounts(null);
+//    }
+
 }

@@ -49,14 +49,14 @@ class AccountRepositoryTest {
                 .stream()
                 .map(AccountEntity::getOwnerNameAccount)
                 .toArray(String[]::new);
-        String[] expected = List.of("Petr")
+        String[] expected = List.of("Ivan", "Petr", "Nikolai")
                 .toArray(String[]::new);
         assertArrayEquals(expected, actual);
     }
 
 
     @Test
-    @Order(4)
+    @Order(2)
     @Transactional
     void whenFindAllByUserInvoked_ThenAllTheAccountsOfUserAreReturned() {
         Optional<UserEntity> petr = userRepository.findByName("Petr");
@@ -64,15 +64,15 @@ class AccountRepositoryTest {
 
         String[] actual = accountRepository.findAllByUsersContains(petr.get())
                 .stream()
-                .map(AccountEntity::getOwnerNameAccount)
+                .map(AccountEntity::getOwnerSurnameAccount)
                 .toArray(String[]::new);
-        String[] expected = List.of("Petr")
+        String[] expected = List.of("Petrov")
                 .toArray(String[]::new);
         assertArrayEquals(expected, actual);
     }
 
     @Test
-    @Order(5)
+    @Order(3)
     void whenFindAllByFilterContainsOnlyUserInvoked_ThenAllTheFilteredByUserAccountAreReturned() {
 
         AccountFilter filter = AccountFilter.builder()
@@ -84,24 +84,24 @@ class AccountRepositoryTest {
                 .stream()
                 .map(AccountEntity::getAccountBalance)
                 .toArray(Float[]::new);
-        Float[] expected = List.of(100.5)
+        Float[] expected = List.of(1000.9f)
                 .toArray(Float[]::new);
         assertArrayEquals(expected, actual);
     }
 
     @Test
-    @Order(6)
+    @Order(4)
     void whenFindAllByFilterContainsUserAndAccountBalanceAndInvoked_ThenAllTheFilteredByUserAndAccountBalanceAreReturned() {
         AccountFilter filter = AccountFilter.builder()
                 .userName("Petr")
-                .accountBalance("100.5")
+                .accountBalance("1000.9")
                 .build();
         Long[] actual = accountRepository.findByFilter(filter)
                 .stream()
                 .map(AccountEntity::getNumberAccount)
                 .toArray(Long[]::new);
-        Long[] expected = List.of(1)
-                .toArray(Long[]::new);
+        Integer[] expected = List.of(123)
+                .toArray(Integer[]::new);
         assertArrayEquals(expected, actual);
     }
 
@@ -126,12 +126,12 @@ class AccountRepositoryTest {
 //    }
 
     @Test
-    @Order(9)
+    @Order(5)
     void testFindAllByOwnerNameAccountIsLikeIgnoreCaseAndAccountBalanceLessThan() {
-        List<String> allOwnerNameAccount = accountRepository.findAllBy("ada", 800F).stream()
+        List<String> allOwnerNameAccount = accountRepository.findAllBy("Petr", 1000.9F).stream()
                 .map(AccountEntity::getOwnerNameAccount)
                 .toList();
-        assertTrue(allOwnerNameAccount.contains("Petr"));
+        assertTrue(allOwnerNameAccount.contains("Ivan"));
     }
 
 //    @Test
@@ -144,11 +144,11 @@ class AccountRepositoryTest {
 //    }
 
     @Test
-    @Order(10)
+    @Order(6)
     @Transactional
-    void testFindSetTitleById() {
-        Optional<AccountEntity> numberAccount = accountRepository.findByNumberAccount(1L);
+    void testFindSetSurnameById() {
+        Optional<AccountEntity> numberAccount = accountRepository.findByNumberAccount(123L);
         accountRepository.setNumberAccountById("Petr", numberAccount.get().getId());
-        assertTrue(accountRepository.findByNumberAccount(1L).isPresent());
+        assertTrue(accountRepository.findByNumberAccount(123L).isPresent());
     }
 }
