@@ -2,6 +2,9 @@ package by.boitman.service;
 
 import by.boitman.database.dto.AccountFilter;
 import by.boitman.database.entity.AccountEntity;
+import by.boitman.database.entity.UserEntity;
+import by.boitman.database.entity.enam.Gender;
+import by.boitman.database.entity.enam.Role;
 import by.boitman.database.repository.AccountRepository;;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -29,7 +32,10 @@ public class AccountService {
                         .ownerNameAccount("Указанный пользователь не найден!")
                         .build());
     }
-
+    public AccountEntity save(AccountEntity account) {
+        account.setGender(Gender.MALE);
+        return accountRepository.save(account);
+    }
     public AccountEntity create(AccountEntity card) {
         return accountRepository.save(card);
     }

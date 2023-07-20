@@ -22,11 +22,11 @@ public interface AccountRepository extends JpaRepository<AccountEntity, Long>, A
     List<AccountEntity> findAllBy(@Param("ownerNameAccount") String ownerNameAccount,
                                @Param("accountBalance") Float accountBalance);
 
-    @Query(value = "SELECT a.* FROM account a " +
-            "JOIN user_account ua ON a.id = ua.account_id " +
-            "JOIN users u ON u.id = ua.user_id " +
-            "WHERE u.name = ?", nativeQuery = true)
-    List<AccountEntity> findAllBy(String name);
+//    @Query(value = "SELECT a.* FROM account a " +
+//            "JOIN user_account ua ON a.id = ua.account_id " +
+//            "JOIN users u ON u.id = ua.user_id " +
+//            "WHERE u.name = ?", nativeQuery = true)
+//    List<AccountEntity> findAllBy(String name);
 
     @Modifying
     @Query("UPDATE AccountEntity a SET a.ownerNameAccount = :ownerNameAccount WHERE a.id = :id")

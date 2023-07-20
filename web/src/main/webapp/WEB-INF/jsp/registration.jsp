@@ -27,12 +27,6 @@
   <label for="passwordId">Укажите Ваш пароль:</label><br>
   <input type="password" id="passwordId" name="password"><br>
 
-<%--  <label for="genderId">Укажите Ваш пол (MALE или FEMALE):</label><br>--%>
-<%--  <input type="gender" id="genderId" name="gender"><br>c--%>
-
-<%--  <label for="roleId">Укажите Вашу роль (ADMIN или USER):</label><br>--%>
-<%--  <input type="role" id="roleId" name="role"><br>--%>
-
   <label for="genderId">Укажите Ваш пол:</label><br>
 
   <select name="gender" id="genderId">
@@ -41,9 +35,9 @@
   </select><br>
 
   <label for="contactId">Укажите Ваш номер телефона:</label><br>
-  <input type="contact" id="contactId" name="contact"><br>
+  <input type="tel" id="contactId" name="contact"><br>
 
-  <label for="rolesId">Укажите Вашу роль:</label><br>
+  <label for="rolesId">Ваша роль:</label><br>
 
   <select name="roles" id="rolesId">
     <option value="USER">USER</option>

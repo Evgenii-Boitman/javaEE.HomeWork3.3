@@ -15,30 +15,45 @@
 <%@ include file="header.jsp" %>
 
 <form action="${pageContext.request.contextPath}/addAccount" method="post">
+
+<%--  <h1>${sessionScope.user.id} - Ваш ID.</h1>--%>
+<%--  <c:set var = "account" value="${requestScope.accounts}"/>--%>
+
+  <label for="userId">Ваш ID:</label><br>
+  <input type="text" id="userId" name="userId" value=${sessionScope.user.id}><br>
+
+  <label for="userId">ID Вашего User:</label><br>
+  <input type="text" id="userId" name="user_id" value=${sessionScope.user.id}><br>
+
   <label for="nameId">Укажите Ваше имя:</label><br>
-  <input type="text" id="nameId" name="name"><br>
+  <input type="text" id="nameId" name="name" value=${sessionScope.user.name}><br>
 
   <label for="surnameId">Укажите Вашу фамилию:</label><br>
-  <input type="text" id="surnameId" name="surname"><br>
+  <input type="text" id="surnameId" name="surname" value=${sessionScope.user.surname}><br>
 
-  <label for="accountNumber">Укажите номер аккаунта:</label><br>
-  <input type="text" id="accountNumber" name="accountNumber"><br>
+  <label for="genderId">Укажите Ваш пол:</label><br>
 
-  <label for="balanceAccount">Укажите баланс аккаунта:</label><br>
-  <input type="text" id="balanceAccount" name="balanceAccount"><br>
+  <select name="gender" id="genderId">
+    <option value="MALE">MALE</option>
+    <option value="FEMALE">FEMALE</option>
+  </select><br>
 
-  <%--  <label for="genderId">Укажите Ваш пол (MALE или FEMALE):</label><br>--%>
-  <%--  <input type="gender" id="genderId" name="gender"><br>c--%>
+  <label for="numberAccountId">Укажите номер аккаунта:</label><br>
+  <input type="number" id="numberAccountId" name="numberAccount" value=${sessionScope.user.id}><br>
 
-  <%--  <label for="roleId">Укажите Вашу роль (ADMIN или USER):</label><br>--%>
-  <%--  <input type="role" id="roleId" name="role"><br>--%>
+  <label for="accountBalanceId">Укажите баланс аккаунта:</label><br>
+  <input type="number" id="accountBalanceId" name="accountBalance"><br>
 
   <br>
-
 
   <input type="submit" value="Submit">
 
 </form>
+
+<c:if test="${ sessionScope.user != null }">
+  <h4><a href=${pageContext.request.contextPath}/accounts>Войти в аккаунт.</a></h4>
+  </form>
+</c:if>
 
 <%@ include file="footer.jsp" %>
 </body>

@@ -61,14 +61,8 @@ public class UserEntity extends CreatableEntity<Long> {
     @OneToMany(mappedBy = "users", orphanRemoval = true, cascade = CascadeType.ALL)
     private List<AccountEntity> accounts = new ArrayList<>();
 
-//    public void addAccount(AccountEntity accountEntity) {
-//        accounts.add(accountEntity);
-//        accountEntity.setUsers(this);
-//    }
-//    public void removeAccount(AccountEntity accountEntity) {
-//        accounts.remove(accountEntity);
-//        accountEntity.setUsers(null);
-//    }
-
+    public UserEntity(String userId) {
+        super();
+    }
 }
 

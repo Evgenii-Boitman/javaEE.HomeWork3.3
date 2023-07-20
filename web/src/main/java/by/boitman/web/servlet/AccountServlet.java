@@ -24,7 +24,7 @@ public class AccountServlet extends HttpServlet {
         AccountService accountService = context.getBean(AccountService.class);
         String id = req.getParameter("id");
         if (id == null) {
-            req.setAttribute("account", accountService.getFindByFilter(
+            req.setAttribute("accounts", accountService.getFindByFilter(
                             AccountFilter.builder()
                                     .accountBalance(req.getParameter("account_balance"))
                                     .userName(req.getParameter("name"))
@@ -53,7 +53,7 @@ public class AccountServlet extends HttpServlet {
                 .ownerSurnameAccount(ownerSurnameAccount)
                 .gender(Gender.valueOf(gender))
                 .numberAccount(Long.valueOf(numberAccount))
-                .accountBalance(Float.valueOf(accountBalance))
+                .accountBalance(Integer.valueOf(accountBalance))
                 .build();
         redirectToAccountPage(req, resp, accountService.create(accountForCreation));
         super.doPost(req, resp);

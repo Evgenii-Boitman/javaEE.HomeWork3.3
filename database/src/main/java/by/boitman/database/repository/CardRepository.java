@@ -22,11 +22,11 @@ public interface CardRepository extends JpaRepository<CardEntity, Long>, CardRep
     List<CardEntity> findAllBy(@Param("ownerName") String ownerName,
                                @Param("balance") Float balance);
 
-    @Query(value = "SELECT c.* FROM card c " +
-            "JOIN account_card ac ON c.id = ac.card_id " +
-            "JOIN account a ON a.id = ac.account_id " +
-            "WHERE a.name = ?", nativeQuery = true)
-    List<AccountEntity> findAllBy(String name);
+//    @Query(value = "SELECT c.* FROM card c " +
+//            "JOIN account_card ac ON c.id = ac.card_id " +
+//            "JOIN account a ON a.id = ac.account_id " +
+//            "WHERE a.name = ?", nativeQuery = true)
+//    List<AccountEntity> findAllBy(String name);
 
     @Modifying
     @Query("UPDATE CardEntity c SET c.ownerName = :ownerName WHERE c.id = :id")

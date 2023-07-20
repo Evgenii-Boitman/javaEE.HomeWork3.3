@@ -12,9 +12,9 @@ public class CardFilter {
     private String ownerName;
     private String limit;
     private String page;
-//    public Float getBalance() {
-//        return balance == null ? 0.0f : Float.parseFloat(balance);
-//    }
+    public Float getBalance() {
+        return balance == null ? 0.0f : Float.parseFloat(balance);
+    }
 
     public Integer getLimit() {
         return limit == null ? 10 : Integer.parseInt(limit);

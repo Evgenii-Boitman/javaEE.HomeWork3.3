@@ -16,8 +16,16 @@
 <h1>
     <h4>Владелец банковского аккаунта: ${account.ownerNameAccount} ${account.ownerSurnameAccount} </h4>
     <h4>Номер банковского аккаунта: ${account.numberAccount}</h4>
-    <h4>Баланс банковского аккаунта: ${account.balanceAccount}</h4>
+    <h4>Баланс банковского аккаунта: ${account.accountBalance}</h4>
 </h1>
+
+<h4><a href=${pageContext.request.contextPath}/addAccounts>Создать аккаунт</a></h4>
+
+<c:if test="${ sessionScope.user != null }">
+    <h4><a href=${pageContext.request.contextPath}/accounts>Войти в аккаунт.</a></h4>
+    </form>
+</c:if>
+
 
 <%@include file="footer.jsp" %>
 </body>

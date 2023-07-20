@@ -41,10 +41,9 @@ public class CardEntity extends CreatableEntity<Long> {
     private Long cardNumber;
 
     @Column(name = "card_balance", nullable = false)
-    private Float balance;
+    private Long balance;
 
     @ManyToOne
-    @Cascade(SAVE_UPDATE)
     @JoinColumn(name = "account_id")
     private AccountEntity accounts;
 

@@ -31,6 +31,7 @@ public class AccountRepositoryExtensionImpl implements AccountRepositoryExtensio
                 .setFirstResult(filter.getOffset())
                 .getResultList();
     }
+
     private static List<Predicate> collectPredicates(AccountFilter filter, CriteriaBuilder cb, Root<AccountEntity> accountRoot, Join<Object, Object> users) {
         List<Predicate> predicates = new ArrayList<>();
         if (filter.getAccountBalance() != null) {

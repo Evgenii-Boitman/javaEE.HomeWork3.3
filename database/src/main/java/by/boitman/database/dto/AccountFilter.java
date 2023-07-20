@@ -13,9 +13,13 @@ public class AccountFilter {
     private String limit;
     private String userName;
     private String page;
-    public Float getAccountBalance() {
-        return accountBalance == null ? 0.0f : Float.parseFloat(accountBalance);
+    public Integer getAccountBalance() {
+        return accountBalance == null ? 1000 : Integer.parseInt(accountBalance);
     }
+
+//    public Float getAccountBalance() {
+//        return accountBalance == null ? 0.0f : Float.parseFloat(accountBalance);
+//    }
 
     public Integer getLimit() {
         return limit == null ? 10 : Integer.parseInt(limit);

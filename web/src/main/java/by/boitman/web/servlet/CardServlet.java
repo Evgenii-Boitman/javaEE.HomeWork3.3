@@ -51,7 +51,7 @@ public class CardServlet extends HttpServlet {
                 .ownerName(ownerName)
                 .ownerSurname(ownerSurname)
                 .cardNumber(Long.valueOf(cardNumber))
-                .balance(Float.valueOf(balance))
+                .balance(Long.valueOf(balance))
                 .build();
         redirectToCardPage(req, resp, cardService.create(cardForCreation));
         super.doPost(req, resp);

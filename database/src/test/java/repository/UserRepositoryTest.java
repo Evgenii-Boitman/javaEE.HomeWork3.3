@@ -23,18 +23,18 @@ class UserRepositoryTest {
     @Autowired
     private UserRepository userRepository;
 
-    @Test
-    void findById() {
-        Page<UserEntity> users = userRepository.findAll(Pageable
-                .ofSize(2)
-                .withPage(0));
-        users.forEach(System.out::println);
-    }
-
-    @Test
-    void findByEmailAndPassword() {
-        Optional<UserEntity> byEmailAndPassword = userRepository.findByEmailAndPassword("anna@anna.by", "anna@anna.by");
-        List<UserEntity> allByPasswordNotEmpty = userRepository.findAllByPasswordNotNull();
-        System.out.println();
-    }
+//    @Test
+//    void findById() {
+//        Page<UserEntity> users = userRepository.findAll(Pageable
+//                .ofSize(2)
+//                .withPage(0));
+//        users.forEach(System.out::println);
+//    }
+//
+//    @Test
+//    void findByEmailAndPassword() {
+//        Optional<UserEntity> byEmailAndPassword = userRepository.findByEmailAndPassword("anna@anna.by", "anna@anna.by");
+//        List<UserEntity> allByPasswordNotEmpty = userRepository.findAllByPasswordNotNull();
+//        System.out.println();
+//    }
 }

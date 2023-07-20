@@ -3,9 +3,10 @@
 -- WHERE TRUE;
 
 DELETE
-FROM users
+FROM account
 WHERE TRUE;
 
 DELETE
-FROM account
+FROM users
 WHERE TRUE;
+

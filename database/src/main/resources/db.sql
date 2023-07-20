@@ -15,19 +15,19 @@ CREATE TABLE users
     gender     VARCHAR(10)        NOT NULL,
     role       VARCHAR(10)        NOT NULL,
     contact    VARCHAR(30)        NULL,
-    created_at DATE               DEFAULT CURRENT_TIMESTAMP
+    created_at DATE DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE account
 (
     id              BIGSERIAL PRIMARY KEY,
-    user_id         BIGINT REFERENCES users (id) NOT NULL,
+    user_id         BIGINT REFERENCES users (id),
     name            VARCHAR(50)                  NOT NULL,
     surname         VARCHAR(50)                  NOT NULL,
     gender          VARCHAR(10)                  NOT NULL,
-    number_account  BIGSERIAL                    NOT NULL,
-    account_balance FLOAT,
-    created_at      DATE                         DEFAULT CURRENT_TIMESTAMP
+    number_account  BIGSERIAL,
+    account_balance BIGINT                       NULL,
+    created_at      DATE DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE card
@@ -36,9 +36,9 @@ CREATE TABLE card
     account_id   BIGINT REFERENCES account (id) NOT NULL,
     name         VARCHAR(50)                    NOT NULL,
     surname      VARCHAR(50)                    NOT NULL,
-    card_number  BIGSERIAL                      NOT NULL,
-    card_balance FLOAT,
-    created_at   DATE                           DEFAULT CURRENT_TIMESTAMP
+    card_number  BIGSERIAL,
+    card_balance BIGINT                         NULL,
+    created_at   DATE DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE contact

@@ -41,24 +41,14 @@ public class AccountEntity extends CreatableEntity<Long> {
     private Long numberAccount;
 
     @Column(name = "account_balance", nullable = false)
-    private Float accountBalance;
+    private Integer accountBalance;
 
-    @ManyToOne
-    @Cascade(SAVE_UPDATE)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
-    private UserEntity users;
+    public UserEntity users;
 
     @Builder.Default
     @OneToMany(mappedBy = "accounts", orphanRemoval = true, cascade = CascadeType.ALL)
     private List<CardEntity> cards = new ArrayList<>();
-
-//    public void addCard(CardEntity cardEntity) {
-//        cards.add(cardEntity);
-//        cardEntity.setAccounts(this);
-//    }
-//    public void removeCard(CardEntity cardEntity) {
-//        cards.remove(cardEntity);
-//        cardEntity.setAccounts(null);
-//    }
 
 }
