@@ -43,8 +43,8 @@ public class CardEntity extends CreatableEntity<Long> {
     @Column(name = "card_balance", nullable = false)
     private Long balance;
 
-    @ManyToOne
-    @JoinColumn(name = "account_id")
-    private AccountEntity accounts;
+//    @ManyToOne
+//    @JoinColumn(name = "account_id")
+//    private AccountEntity accounts;
 
 }

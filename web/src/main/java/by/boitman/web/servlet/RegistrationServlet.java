@@ -13,7 +13,6 @@ import by.boitman.web.util.PagesUtil;
 import org.springframework.context.ApplicationContext;
 import java.io.IOException;
 
-@WebServlet("/registration")
 public class RegistrationServlet extends HttpServlet {
 
     @Override

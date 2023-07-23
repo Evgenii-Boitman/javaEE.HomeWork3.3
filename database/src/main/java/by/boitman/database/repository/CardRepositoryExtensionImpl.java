@@ -24,7 +24,7 @@ public class CardRepositoryExtensionImpl implements CardRepositoryExtension {
         CriteriaQuery<CardEntity> query = cb.createQuery(CardEntity.class);
         Root<CardEntity> cardRoot = query.from(CardEntity.class);
         query.select(cardRoot);
-        Join<Object, Object> accounts = cardRoot.join(CardEntity_.ACCOUNTS);
+        Join<Object, Object> accounts = cardRoot.join(CardEntity_.BALANCE);//исправил с ACCOUNTS на BALANCE т.к. убрал связи
         query.where(collectPredicates(filter, cb, cardRoot, accounts).toArray(Predicate[]::new));
         return entityManager.createQuery(query)
                 .setMaxResults(filter.getLimit())

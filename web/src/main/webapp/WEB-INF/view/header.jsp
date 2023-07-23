@@ -1,3 +1,4 @@
+
 <%--
   Created by IntelliJ IDEA.
   User: Eugenio
@@ -8,8 +9,16 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <h1>Menu: <a href=/main>Главная</a> | <a href=/contacts>Контакты</a> | <a href=/bank>О банке</a> | <a href=/login>Войти</a> </h1>
 <h1>Банк "Речица"</h1>
-<c:if test="${ sessionScope.user != null }">
-    <form action="${pageContext.request.contextPath}/logout" method="get">
+
+<sec:authorize access="isAuthenticated()">
+    <b>Привет ${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username}</b>
+    <form action="/logout" method="post">
         <input type="submit" value="Logout">
     </form>
-</c:if>
+</sec:authorize>
+
+<%--<c:if test="${ sessionScope.user != null }">--%>
+<%--    <form action="${pageContext.request.contextPath}/logout" method="get">--%>
+<%--        <input type="submit" value="Logout">--%>
+<%--    </form>--%>
+<%--</c:if>--%>

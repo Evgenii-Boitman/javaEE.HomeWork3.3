@@ -18,5 +18,8 @@ public class AccountCreationDto {
     String ownerNameAccount;
     String ownerSurnameAccount;
     Gender gender;
+    Long numberAccount;
+    Integer accountBalance;
     List<Long> usersIds = new ArrayList<>();
+//    List<Long> cardsIds = new ArrayList<>();
 }

@@ -1,5 +1,6 @@
 package by.boitman.database.repository;
 
+import by.boitman.database.entity.CardEntity;
 import by.boitman.database.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -14,5 +15,7 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
     List<UserEntity> findAllByPasswordNotNull();
 
     Optional<UserEntity> findByName(String name);
+//    List<CardEntity> findAllByIdIn(List<Long> ids);
+    Optional<UserEntity> findByEmail(String email);
 }
 

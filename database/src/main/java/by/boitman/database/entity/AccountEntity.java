@@ -47,8 +47,8 @@ public class AccountEntity extends CreatableEntity<Long> {
     @JoinColumn(name = "user_id")
     public UserEntity users;
 
-    @Builder.Default
-    @OneToMany(mappedBy = "accounts", orphanRemoval = true, cascade = CascadeType.ALL)
-    private List<CardEntity> cards = new ArrayList<>();
+//    @Builder.Default
+//    @OneToMany(mappedBy = "accounts", orphanRemoval = true, cascade = CascadeType.ALL)
+//    private List<CardEntity> cards = new ArrayList<>();
 
 }

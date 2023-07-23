@@ -14,7 +14,6 @@
 <body>
 <%@include file="header.jsp" %>
 
-
 <%--<c:choose>--%>
 <%--    <c:when test="${sessionScope.user.name == 'Admin'}">--%>
 <%--        <h1>${sessionScope.user.name}, рады Вас приветствовать!</h1>--%>
@@ -50,6 +49,7 @@
 
 <%--    </c:otherwise>--%>
 <%--</c:choose>--%>
+
 <c:if test="${sessionScope.user.name == 'Admin'}">
     <h1>${sessionScope.user.name}, рады Вас приветствовать!</h1>
 
