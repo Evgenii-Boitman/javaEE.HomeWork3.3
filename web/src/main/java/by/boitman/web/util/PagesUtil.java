@@ -1,10 +1,13 @@
 package by.boitman.web.util;
 
-public class PagesUtil {
+import lombok.experimental.UtilityClass;
+
+
+public final class PagesUtil {
     public static final String PREFIX = "/WEB-INF/view/";
     public static final String SUFFIX = ".jsp";
-    public static final String CARDS = "/cards";
-    public static final String CARD = "/card";
+//    public static final String CARDS = "/cards";
+//    public static final String CARD = "/card";
     public static final String LOGIN = "/login";
     public static final String CONTACT = "/contacts";
     public static final String BANK = "/bank";

@@ -18,9 +18,9 @@ public interface AccountRepository extends JpaRepository<AccountEntity, Long>, A
 
     List<AccountEntity> findAllByUsersContains(UserEntity user);
 
-    @Query(value = "SELECT a FROM AccountEntity a WHERE a.ownerNameAccount LIKE %:ownerNameAccount% AND a.accountBalance < :accountBalance")
-    List<AccountEntity> findAllBy(@Param("ownerNameAccount") String ownerNameAccount,
-                               @Param("accountBalance") Float accountBalance);
+//    @Query(value = "SELECT a FROM AccountEntity a WHERE a.ownerNameAccount LIKE %:ownerNameAccount% AND a.accountBalance < :accountBalance")
+//    List<AccountEntity> findAllBy(@Param("ownerNameAccount") String ownerNameAccount,
+//                               @Param("accountBalance") Float accountBalance);
 
 //    @Query(value = "SELECT a.* FROM account a " +
 //            "JOIN user_account ua ON a.id = ua.account_id " +
@@ -28,7 +28,7 @@ public interface AccountRepository extends JpaRepository<AccountEntity, Long>, A
 //            "WHERE u.name = ?", nativeQuery = true)
 //    List<AccountEntity> findAllBy(String name);
 
-    @Modifying
-    @Query("UPDATE AccountEntity a SET a.ownerNameAccount = :ownerNameAccount WHERE a.id = :id")
-    void setNumberAccountById(@Param("ownerNameAccount") String ownerNameAccount, @Param("id") Long id);
+//    @Modifying
+//    @Query("UPDATE AccountEntity a SET a.ownerNameAccount = :ownerNameAccount WHERE a.id = :id")
+//    void setNumberAccountById(@Param("ownerNameAccount") String ownerNameAccount, @Param("id") Long id);
 }

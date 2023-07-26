@@ -20,19 +20,18 @@ import static by.boitman.web.util.PagesUtil.*;
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-    public static final String VIEW_PATH = "/WEB-INF/view/*";
+    private static final String VIEW_PATH = "/WEB-INF/view/*";
     private final UserService userService;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
-                .csrf(AbstractHttpConfigurer::disable)
+        http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(VIEW_PATH, LOGIN, REGISTRATION).permitAll()
+                        .requestMatchers(VIEW_PATH, REGISTRATION, LOGIN).permitAll()
                         .anyRequest().authenticated())
                 .formLogin(login -> login
                         .loginPage(LOGIN)
-                        .defaultSuccessUrl(ACCOUNT));
+                        .defaultSuccessUrl(ACCOUNT, true));
 
         return http.build();
     }

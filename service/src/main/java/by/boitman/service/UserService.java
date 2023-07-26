@@ -12,6 +12,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 import java.util.Optional;
 
 import static by.boitman.database.entity.enam.Role.USER;
@@ -23,9 +25,11 @@ public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
     private final AccountService accountService;
-    private final CardService cardService;
-    private final PasswordEncoder passwordEncoder;
 
+    private final PasswordEncoder passwordEncoder;
+    public Optional<UserEntity> findByEmailAndPass(LoginDto login) {
+        return userRepository.findByEmailAndPassword(login.email(), login.password());
+    }
     public Optional<UserEntity> getBy(LoginDto login) {
         return userRepository.findByEmailAndPassword(login.email(), login.password());
     }
@@ -35,10 +39,20 @@ public class UserService implements UserDetailsService {
     }
 
     public UserEntity save(UserEntity user) {
-        user.setRole(USER);
         return userRepository.save(user);
     }
+    public List<UserEntity> findAll() {
+        return userRepository.findAll();
+    }
+    public Optional<UserEntity> update(UserEntity user) {
+        return update(user);
+    }
 
+    public boolean delete(Long id) {
+        Optional<UserEntity> removedUser = userRepository.findById(id);
+        userRepository.delete(removedUser.get());
+        return true;
+    }
     public Optional<UserEntity> createUser(RegistrationDto registration) {
         return Optional.of(userRepository.save(UserEntity.builder()
                 .email(registration.email())

@@ -4,7 +4,6 @@ import by.boitman.database.dto.AccountCreationDto;
 import by.boitman.database.dto.AccountFilter;
 import by.boitman.database.dto.AccountReadDto;
 import by.boitman.database.entity.AccountEntity;
-import by.boitman.database.entity.CardEntity;
 import by.boitman.database.entity.UserEntity;
 import by.boitman.database.entity.enam.Gender;
 import by.boitman.database.repository.AccountRepository;;
@@ -17,6 +16,7 @@ import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,7 +27,7 @@ public class AccountService {
 
     private final AccountRepository accountRepository;
     private final UserRepository userRepository;
-    private final UserRepository cardRepository;
+
 
 
     public List<AccountReadDto> getAll() {
@@ -36,11 +36,28 @@ public class AccountService {
                 .map(this::toReadDto)
                 .toList();
     }
-
+    public List<AccountEntity> findByFilter(AccountFilter filter) {
+        return accountRepository.findByFilter(filter);
+    }
+    public AccountEntity findById(Long id) {
+        return accountRepository.findById(id)
+                .orElse(AccountEntity.builder().build());
+    }
     @Cacheable("account")
     public Optional<AccountReadDto> getById(Long id) {
         return accountRepository.findById(id)
                 .map(this::toReadDto);
+    }
+
+    public Optional<AccountEntity> save(AccountCreationDto account) {
+        return Optional.of(accountRepository.save(AccountEntity.builder()
+                .ownerNameAccount(account.getOwnerNameAccount())
+                .ownerSurnameAccount(account.getOwnerSurnameAccount())
+                .gender(account.getGender())
+                .numberAccount(account.getNumberAccount())
+                .accountBalance(account.getAccountBalance())
+                .users((UserEntity) account.getUsersIds())
+                .build()));
     }
 
     private AccountReadDto toReadDto(AccountEntity account) {
@@ -101,7 +118,7 @@ public class AccountService {
         return accountRepository.findAll();
     }
 
-    public List<AccountEntity>  getAllOwnerSurnameAccount() {
+    public List<AccountEntity> getAllOwnerSurnameAccount() {
         return accountRepository.findAll();
     }
 

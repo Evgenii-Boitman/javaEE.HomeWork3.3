@@ -3,6 +3,7 @@ package by.boitman.web.controller;
 
 import by.boitman.database.dto.AccountCreationDto;
 import by.boitman.database.dto.AccountFilter;
+import by.boitman.database.entity.AccountEntity;
 import by.boitman.database.entity.enam.Gender;
 import by.boitman.service.AccountService;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
+import java.util.Optional;
 
 import static by.boitman.web.util.PagesUtil.ACCOUNT;
 
@@ -41,15 +43,15 @@ public class AccountController {
                 .orElse("redirect:/account");
     }
 
-    @PreAuthorize("hasAuthority('USER')")
+//    @PreAuthorize("hasAuthority('USER')")
     @GetMapping(path = "/addAccount")
     public String createAccountPage(Model model, Principal principal) {
-        String username = principal.getName();
-        model.addAttribute("ownerNameAccount", accountService.getAllOwnerNameAccount());
-        model.addAttribute("ownerSurnameAccount", accountService.getAllOwnerSurnameAccount());
-        model.addAttribute("gender", accountService.getAllGender());
-        model.addAttribute("numberAccount", accountService.getAllNumberAccount());
-        model.addAttribute("accountBalance", accountService.getAllAccountBalance());
+//        String username = principal.getName();
+//        model.addAttribute("ownerNameAccount", accountService.getAllOwnerNameAccount());
+//        model.addAttribute("ownerSurnameAccount", accountService.getAllOwnerSurnameAccount());
+//        model.addAttribute("gender", accountService.getAllGender());
+//        model.addAttribute("numberAccount", accountService.getAllNumberAccount());
+//        model.addAttribute("accountBalance", accountService.getAllAccountBalance());
         return "addAccount";
     }
 
