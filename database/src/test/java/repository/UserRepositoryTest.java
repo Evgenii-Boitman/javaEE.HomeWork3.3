@@ -1,19 +1,12 @@
 package repository;
 
 import by.boitman.database.config.DatabaseConfig;
-import by.boitman.database.entity.UserEntity;
 import by.boitman.database.repository.UserRepository;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-
-import java.util.List;
-import java.util.Optional;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = {DatabaseConfig.class})

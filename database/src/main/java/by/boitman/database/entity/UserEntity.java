@@ -28,7 +28,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "users")
-public class UserEntity extends CreatableEntity<Long> {
+public class UserEntity extends CreatableEntity implements BaseEntity<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,7 +43,7 @@ public class UserEntity extends CreatableEntity<Long> {
     @Column(name = "email", length = 50, nullable = false, unique = true)
     private String email;
 
-    @Column(name = "password", length = 50, nullable = false)
+    @Column(name = "password", length = 256, nullable = false)
     private String password;
 
     @Enumerated(EnumType.STRING)
@@ -51,7 +51,7 @@ public class UserEntity extends CreatableEntity<Long> {
     private Gender gender;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "role", length = 10)
+    @Column(name = "role", length = 32)
     private Role role;
 
     @Column(name = "contact", length = 30, nullable = false)
@@ -61,8 +61,8 @@ public class UserEntity extends CreatableEntity<Long> {
     @OneToMany(mappedBy = "users", orphanRemoval = true, cascade = CascadeType.ALL)
     private List<AccountEntity> accounts = new ArrayList<>();
 
-    public UserEntity(String userId) {
-        super();
-    }
+//    public UserEntity(String userId) {
+//        super();
+//    }
 }
 

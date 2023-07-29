@@ -17,10 +17,12 @@
 
 <h4>Добро пожаловать в веб-приложение "Банк "Речица"".</h4>
 
-<c:if test="${ sessionScope.user != null }">
+<form action="${pageContext.request.contextPath}/main" method="post">
+  <c:if test="${ sessionScope.user != null }">
   <h4><a href=${pageContext.request.contextPath}/accounts>Войти в аккаунт.</a></h4>
-  </form>
 </c:if>
+</form>
+
 
 
 <%@include file="footer.jsp" %>

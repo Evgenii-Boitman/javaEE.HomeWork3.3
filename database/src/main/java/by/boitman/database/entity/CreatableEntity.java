@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 @MappedSuperclass
-public abstract class CreatableEntity<T extends Serializable> implements BaseEntity<T> {
+public abstract class CreatableEntity{
 
     @CreationTimestamp
     @Column(name = "created_at", nullable = false)

@@ -1,15 +1,9 @@
 package repository;
 
 import by.boitman.database.config.DatabaseConfig;
-import by.boitman.database.dto.AccountFilter;
-import by.boitman.database.entity.AccountEntity;
-import by.boitman.database.entity.UserEntity;
 import by.boitman.database.repository.AccountRepository;
 import by.boitman.database.repository.UserRepository;
-import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.MethodOrderer;
-import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +12,6 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlGroup;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import java.util.List;
-import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.context.jdbc.Sql.ExecutionPhase.AFTER_TEST_METHOD;
 import static org.springframework.test.context.jdbc.Sql.ExecutionPhase.BEFORE_TEST_METHOD;
 

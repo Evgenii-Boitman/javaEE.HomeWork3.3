@@ -37,12 +37,11 @@
   <label for="contactId">Укажите Ваш номер телефона:</label><br>
   <input type="tel" id="contactId" name="contact"><br>
 
-  <label for="rolesId">Ваша роль:</label><br>
+<%--  <label for="rolesId">Ваша роль:</label><br>--%>
 
-  <select name="roles" id="rolesId">
-    <option value="USER">USER</option>
-<%--    <option value="ADMIN">ADMIN</option>--%>
-  </select><br>
+<%--  <select name="roles" id="rolesId">--%>
+<%--    <option value="USER">USER</option>--%>
+<%--  </select><br>--%>
   <br>
 
   <input type="submit" value="Submit">

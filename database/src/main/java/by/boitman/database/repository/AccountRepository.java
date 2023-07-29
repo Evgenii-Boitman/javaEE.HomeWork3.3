@@ -1,7 +1,7 @@
 package by.boitman.database.repository;
 
-import by.boitman.database.entity.AccountEntity;
 import by.boitman.database.entity.UserEntity;
+import by.boitman.database.entity.AccountEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -31,4 +31,5 @@ public interface AccountRepository extends JpaRepository<AccountEntity, Long>, A
     @Modifying
     @Query("UPDATE AccountEntity a SET a.ownerNameAccount = :ownerNameAccount WHERE a.id = :id")
     void setNumberAccountById(@Param("ownerNameAccount") String ownerNameAccount, @Param("id") Long id);
+
 }

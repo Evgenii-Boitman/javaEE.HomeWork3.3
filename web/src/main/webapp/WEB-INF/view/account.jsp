@@ -19,11 +19,10 @@
     <h4>Баланс банковского аккаунта: ${account.accountBalance}</h4>
 </h1>
 
-<h4><a href=${pageContext.request.contextPath}/addAccounts>Создать аккаунт</a></h4>
+<h4><a href=${pageContext.request.contextPath}/addAccount>Создать аккаунт</a></h4>
 
 <c:if test="${ sessionScope.user != null }">
-    <h4><a href=${pageContext.request.contextPath}/accounts>Войти в аккаунт.</a></h4>
-    </form>
+    <h4><a href=${pageContext.request.contextPath}/accounts>Вернуться в аккаунт.</a></h4>
 </c:if>
 
 

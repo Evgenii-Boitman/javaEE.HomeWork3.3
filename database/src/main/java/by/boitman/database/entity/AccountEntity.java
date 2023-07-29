@@ -7,12 +7,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Cascade;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.hibernate.annotations.CascadeType.SAVE_UPDATE;
 
 @Data
 @Builder
@@ -21,7 +18,7 @@ import static org.hibernate.annotations.CascadeType.SAVE_UPDATE;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "account")
-public class AccountEntity extends CreatableEntity<Long> {
+public class AccountEntity implements BaseEntity<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

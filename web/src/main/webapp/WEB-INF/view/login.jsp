@@ -23,7 +23,10 @@
 
   <input type="submit" value="Submit">
 </form>
-<a href="${pageContext.request.contextPath}/registration">Регистрация</a>
+
+<form action="${pageContext.request.contextPath}/registration" method="get">
+  <input type="submit" value="Регистрация">
+</form>
 
 <c:if test="${ param.error  == true}">
   Неправильный Логин или Пароль
