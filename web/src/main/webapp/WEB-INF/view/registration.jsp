@@ -47,6 +47,10 @@
   <input type="submit" value="Submit">
 </form>
 
+<c:if test="${ param.error == true}">
+  Пользователь с данным email уже существует
+</c:if>
+
 <%@ include file="footer.jsp" %>
 </body>
 </html>

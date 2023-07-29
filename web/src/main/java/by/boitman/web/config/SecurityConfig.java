@@ -33,7 +33,7 @@ public class SecurityConfig {
                         .anyRequest().authenticated())
                 .formLogin(login -> login
                         .loginPage(PagesUtil.LOGIN)
-                        .defaultSuccessUrl(ACCOUNT, true));
+                        .defaultSuccessUrl(ACCOUNT));
 
         return http.build();
     }

@@ -4,6 +4,7 @@ package by.boitman.web.controller;
 import by.boitman.database.dto.AccountCreationDto;
 import by.boitman.database.dto.AccountFilter;
 import by.boitman.service.AccountService;
+import by.boitman.web.util.PagesUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -24,7 +25,6 @@ public class AccountController {
 
     private final AccountService accountService;
 
-    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping
     public String getAllAccountsPage(Model model, AccountFilter accountFilter) {
         model.addAttribute("accounts", accountService.getFindByFilter(accountFilter));
@@ -33,19 +33,19 @@ public class AccountController {
 
     @GetMapping(path = "/{id}")
     public String getAccountPage(Model model, @PathVariable Long id) {
-        model.addAttribute("account", accountService.findById(id));
-        return "account";
-//
-//        return accountService.getById(id).
-//                map(account -> {
-//                    model.addAttribute("account", account);
-//                    return "account";
-//                })
-//                .orElse("redirect:/account");
+//        model.addAttribute("account", accountService.findById(id));
+//        return "account";
+
+        return accountService.getById(id).
+                map(account -> {
+                    model.addAttribute("account", account);
+                    return "account";
+                })
+                .orElse("redirect:/account");
     }
 
     @PreAuthorize("hasAuthority('USER')")
-    @GetMapping(path = "/addAccount")
+    @GetMapping(path = "/create")
     public String createAccountPage(Model model, Principal principal) {
         String username = principal.getName();
         model.addAttribute("ownerNameAccount", accountService.getAllOwnerNameAccount());
@@ -53,11 +53,11 @@ public class AccountController {
         model.addAttribute("gender", accountService.getAllGender());
         model.addAttribute("numberAccount", accountService.getAllNumberAccount());
         model.addAttribute("accountBalance", accountService.getAllAccountBalance());
-        return "addAccount";
+        return "add-account";
     }
 
     @PreAuthorize("hasAuthority('USER')")
-    @PostMapping(path = "/addAccount")
+    @PostMapping(path = "/create")
     public String createAccount(AccountCreationDto account) {
         return "redirect:/account/" + accountService.create(account);
     }

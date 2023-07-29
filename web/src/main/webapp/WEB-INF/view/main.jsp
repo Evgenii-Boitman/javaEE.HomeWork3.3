@@ -10,19 +10,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-  <title>О Банке "Речица":</title>
+    <title>О Банке "Речица":</title>
 </head>
 <body>
 <%@include file="header.jsp" %>
 
 <h4>Добро пожаловать в веб-приложение "Банк "Речица"".</h4>
 
-<form action="${pageContext.request.contextPath}/main" method="post">
-  <c:if test="${ sessionScope.user != null }">
-  <h4><a href=${pageContext.request.contextPath}/accounts>Войти в аккаунт.</a></h4>
-</c:if>
-</form>
 
+<c:if test="${ sessionScope.SPRING_SECURITY_CONTEXT != null }">
+    <h4><a href=${pageContext.request.contextPath}/account>Вернуться в аккаунт.</a></h4>
+</c:if>
 
 
 <%@include file="footer.jsp" %>

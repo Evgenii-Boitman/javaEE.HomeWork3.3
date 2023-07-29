@@ -16,9 +16,8 @@
 
 <h4>Банк "Речица" был основан в 2023 году.</h4>
 
-<c:if test="${ sessionScope.user != null }">
-  <h4><a href=${pageContext.request.contextPath}/accounts>Войти в аккаунт.</a></h4>
-  </form>
+<c:if test="${ sessionScope.SPRING_SECURITY_CONTEXT != null }">
+  <h4><a href=${pageContext.request.contextPath}/account>Вернуться в аккаунт.</a></h4>
 </c:if>
 
 

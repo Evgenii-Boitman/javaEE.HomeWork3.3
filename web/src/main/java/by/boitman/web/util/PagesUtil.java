@@ -10,7 +10,7 @@ public class PagesUtil {
     public static final String BANK = "/bank";
     public static final String MAIN = "/main";
     public static final String REGISTRATION = "/registration";
-    public static final String ADDACCOUNT = "/addAccount";
+    public static final String ADDACCOUNT = "/add-account";
     public static final String ACCOUNTS = "/accounts";
     public static final String ACCOUNT = "/account";
     public static final String API = "api/";

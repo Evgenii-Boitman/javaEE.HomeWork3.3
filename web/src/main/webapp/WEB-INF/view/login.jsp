@@ -15,8 +15,8 @@
 <%@ include file="header.jsp" %>
 
 <form action="${pageContext.request.contextPath}/login" method="post">
-  <label for="emailId">Email:</label><br>
-  <input type="email" id="emailId" name="email"><br>
+  <label for="usernameId">Email:</label><br>
+  <input type="email" id="usernameId" name="username"><br>
 
   <label for="passwordId">Пароль:</label><br>
   <input type="password" id="passwordId" name="password"><br>

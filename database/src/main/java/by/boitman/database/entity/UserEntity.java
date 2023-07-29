@@ -2,16 +2,7 @@ package by.boitman.database.entity;
 
 import by.boitman.database.entity.enam.Gender;
 import by.boitman.database.entity.enam.Role;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,12 +14,12 @@ import java.util.List;
 
 @Data
 @Builder
-@EqualsAndHashCode(of = "id", callSuper = false)
+@EqualsAndHashCode(of = "id", callSuper = true)
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "users")
-public class UserEntity extends CreatableEntity implements BaseEntity<Long> {
+public class UserEntity extends CreatableEntity<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -58,7 +49,7 @@ public class UserEntity extends CreatableEntity implements BaseEntity<Long> {
     private String contact;
 
     @Builder.Default
-    @OneToMany(mappedBy = "users", orphanRemoval = true, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "users", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<AccountEntity> accounts = new ArrayList<>();
 
 //    public UserEntity(String userId) {

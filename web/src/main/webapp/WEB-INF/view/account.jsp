@@ -12,17 +12,31 @@
 <body>
 <%@include file="header.jsp" %>
 
+
 <h1>${sessionScope.user.name}, рады Вас приветствовать!</h1>
+<h1>${sessionScope.user.id} - Ваш ID.</h1>
 <h1>
     <h4>Владелец банковского аккаунта: ${account.ownerNameAccount} ${account.ownerSurnameAccount} </h4>
     <h4>Номер банковского аккаунта: ${account.numberAccount}</h4>
     <h4>Баланс банковского аккаунта: ${account.accountBalance}</h4>
 </h1>
 
-<h4><a href=${pageContext.request.contextPath}/addAccount>Создать аккаунт</a></h4>
+<sec:authorize access="hasAuthority('USER')">
+    <h4><a href=${pageContext.request.contextPath}/add-account>Создать новый аккаунт</a></h4>
 
-<c:if test="${ sessionScope.user != null }">
-    <h4><a href=${pageContext.request.contextPath}/accounts>Вернуться в аккаунт.</a></h4>
+    <form action="${pageContext.request.contextPath}/account/${account.id}/update" method="post">
+        <label for="balanceAccountId">Баланс аккаунта:</label><br>
+        <input type="number" id="balanceAccountId" name="pages" value="${account.accountBalance}"><br>
+        <input type="submit" value="UPDATE">
+    </form>
+
+    <form action="${pageContext.request.contextPath}/account/${account.id}/delete" method="post">
+        <button>DELETE</button>
+    </form>
+</sec:authorize>
+
+<c:if test="${ sessionScope.SPRING_SECURITY_CONTEXT != null }">
+    <h4><a href=${pageContext.request.contextPath}/account>Вернуться в аккаунт.</a></h4>
 </c:if>
 
 

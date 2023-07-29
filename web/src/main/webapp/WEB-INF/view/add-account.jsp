@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
   <title>Регистрация нового банковского аккаунта</title>
@@ -14,13 +15,10 @@
 <body>
 <%@ include file="header.jsp" %>
 
-<form action="${pageContext.request.contextPath}/addAccount" method="post">
+<form action="${pageContext.request.contextPath}/add-account/create" method="post">
 
-<%--  <h1>${sessionScope.user.id} - Ваш ID.</h1>--%>
-<%--  <c:set var = "account" value="${requestScope.accounts}"/>--%>
-
-  <label for="userId">Ваш ID:</label><br>
-  <input type="text" id="userId" name="userId" value=${sessionScope.user.id}><br>
+<%--  <label for="userId">Ваш ID:</label><br>--%>
+<%--  <input type="text" id="userId" name="userId" value=${sessionScope.user.id}><br>--%>
 
   <label for="userId">ID Вашего User:</label><br>
   <input type="text" id="userId" name="user_id" value=${sessionScope.user.id}><br>
@@ -50,9 +48,12 @@
 
 </form>
 
-<c:if test="${ sessionScope.user != null }">
-  <h4><a href=${pageContext.request.contextPath}/accounts>Войти в аккаунт.</a></h4>
-  </form>
+<c:if test="${ param.error == true}">
+  Аккаунт не создан
+</c:if>
+
+<c:if test="${ sessionScope.SPRING_SECURITY_CONTEXT != null }">
+  <h4><a href=${pageContext.request.contextPath}/account>Вернуться в аккаунт.</a></h4>
 </c:if>
 
 <%@ include file="footer.jsp" %>

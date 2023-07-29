@@ -17,9 +17,8 @@
 <h4>Контак-центр: +375 2340 5-20-70 </h4>
 <h4>Приемная директора: +375 2340 5-20-71 </h4>
 
-<c:if test="${ sessionScope.user != null }">
-    <h4><a href=${pageContext.request.contextPath}/accounts>Войти в аккаунт.</a></h4>
-    </form>
+<c:if test="${ sessionScope.SPRING_SECURITY_CONTEXT != null }">
+    <h4><a href=${pageContext.request.contextPath}/account>Вернуться в аккаунт.</a></h4>
 </c:if>
 
 <%@include file="footer.jsp" %>
