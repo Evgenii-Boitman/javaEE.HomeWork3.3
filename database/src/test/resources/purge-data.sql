@@ -1,0 +1,12 @@
+-- DELETE
+-- FROM user_account
+-- WHERE TRUE;
+
+DELETE
+FROM account
+WHERE TRUE;
+
+DELETE
+FROM users
+WHERE TRUE;
+
